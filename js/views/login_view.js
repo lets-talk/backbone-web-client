@@ -1,14 +1,16 @@
 window.LoginView = Backbone.View.extend({
-    el: $("#login-form"),
- 
+    el: "#login-form",
+
+    model: new Backbone.Model(),
+
     events: {
-        "click #login": "login"
+        "submit form": "login"
     },
 
     initialize: function(){
         var self = this;
 
-        this.login = $("#login-form").html();
+        this.markup = $("#login-form-template").html();
         this.url = "http://54.183.100.51/api/v1/tokens/client";
 
         this.email = $("#email");
@@ -23,7 +25,9 @@ window.LoginView = Backbone.View.extend({
         });
     },
 
-    login: function() {
+    login: function(e) {
+        e.preventDefault();
+
         $.ajax({
             url: url
         });
@@ -35,7 +39,7 @@ window.LoginView = Backbone.View.extend({
     },
 
     render: function() {
-        $(this.el).html(this.login);
+        $(this.el).html(this.markup);
         return this;
     }
 });

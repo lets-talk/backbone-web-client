@@ -4,11 +4,11 @@ window.LetsTalkApp = new (Backbone.Router.extend({
   },
 
   initialize: function(){
-    this.loginView = new LoginView();
-    this.loginView.render();
   },
 
   index: function(){
+    this.loginView = new LoginView();
+    this.loginView.render();
     //$('#app').html(this.todosView.el);
     //this.todoItems.fetch();
   },
