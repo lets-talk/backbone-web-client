@@ -4,8 +4,7 @@ window.LetsTalkApp = new (Backbone.Router.extend({
   },
 
   initialize: function(){
-    //this.todoItems = new TodoItems();
-    this.loginView = new LoginView({ el: "#login-form" });
+    this.loginView = new LoginView();
     this.loginView.render();
   },
 
@@ -16,6 +15,7 @@ window.LetsTalkApp = new (Backbone.Router.extend({
 
   start: function(){
     Backbone.history.start();
+
   },
 
   show: function(id){

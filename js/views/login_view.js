@@ -1,5 +1,5 @@
 window.LoginView = Backbone.View.extend({
-    //el: $("#login-form"),
+    el: $("#login-form"),
  
     events: {
         "click #login": "login"
@@ -9,6 +9,7 @@ window.LoginView = Backbone.View.extend({
         var self = this;
 
         this.login = $("#login-form").html();
+        this.url = "http://54.183.100.51/api/v1/tokens/client";
 
         this.email = $("#email");
         this.password = $("#password");
@@ -22,19 +23,19 @@ window.LoginView = Backbone.View.extend({
         });
     },
 
-    login: function(){
+    login: function() {
+        $.ajax({
+            url: url
+        });
         /*var email = this.model.get('email');
         var pword = this.model.get('password');
         alert("You logged in as " + email + " and a password of " + pword);
         return false;*/
-        
-        return false;
+        alert('hola');
     },
 
     render: function() {
-        alert('hol');
-        this.$el.html('<h1>hola</h1>');
-        //$(this.el).html(this.login);
+        $(this.el).html(this.login);
         return this;
     }
 });

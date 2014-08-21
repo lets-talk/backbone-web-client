@@ -6,4 +6,6 @@
 //= require_tree ./views
 //= require router
 
-$(function(){ LetsTalkApp.start() });
+$(function(){ 
+	LetsTalkApp.start();
+});
