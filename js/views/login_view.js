@@ -11,7 +11,7 @@ window.LoginView = Backbone.View.extend({
         var self = this;
 
         this.markup = $("#login-form-template").html();
-        this.url = "http://staging.api.letsta.lk/api/v1/tokens/client";
+        this.url = "http://api.staging.letsta.lk/api/v1/tokens/client";
 
         this.email = $("#email");
         this.password = $("#password");
