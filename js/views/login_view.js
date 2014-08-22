@@ -11,7 +11,7 @@ window.LoginView = Backbone.View.extend({
         var self = this;
 
         this.markup = $("#login-form-template").html();
-        this.url = "http://54.183.100.51/api/v1/tokens/client";
+        this.url = "http://staging.api.letsta.lk/api/v1/tokens/client";
 
         this.email = $("#email");
         this.password = $("#password");
@@ -29,13 +29,25 @@ window.LoginView = Backbone.View.extend({
         e.preventDefault();
 
         $.ajax({
-            url: url
+            type: 'POST',
+            url: this.url,
+            headers: { 'Access-Control-Allow-Origin': '*' },
+            beforeSend: function (request)
+            {
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            },
+            data: 'email=' + this.email.val() + '&password=' + this.password.val(),
+            success: function(response){
+                alert(data);
+            },
+            dataType: 'json'
         });
+
         /*var email = this.model.get('email');
         var pword = this.model.get('password');
         alert("You logged in as " + email + " and a password of " + pword);
         return false;*/
-        alert('hola');
+        //alert('hola');
     },
 
     render: function() {
