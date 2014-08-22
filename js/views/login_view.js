@@ -31,11 +31,6 @@ window.LoginView = Backbone.View.extend({
         $.ajax({
             type: 'POST',
             url: this.url,
-            headers: { 'Access-Control-Allow-Origin': '*' },
-            beforeSend: function (request)
-            {
-                request.setRequestHeader("Access-Control-Allow-Origin", "*");
-            },
             data: 'email=' + this.email.val() + '&password=' + this.password.val(),
             success: function(response){
                 alert(data);
