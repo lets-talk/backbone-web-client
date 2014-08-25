@@ -12,41 +12,44 @@ window.LoginView = Backbone.View.extend({
 
         this.markup = $("#login-form-template").html();
         this.url = "http://api.staging.letsta.lk/api/v1/tokens/client";
-
-        this.email = $("#email");
-        this.password = $("#password");
-
-        this.email.change(function(e){
-        	self.model.set({email: $(e.currentTarget).val()});
-        });
-
-        this.password.change(function(e){
-		  self.model.set({password: $(e.currentTarget).val()});
-        });
     },
 
     login: function(e) {
         e.preventDefault();
 
+        var email = $("#email").val();
+        var password = $("#password").val();
+
+        if(!this.validateForm(email, password)) return
+
         $.ajax({
             type: 'POST',
             url: this.url,
-            data: 'email=' + this.email.val() + '&password=' + this.password.val(),
-            success: function(response){
-                alert(data);
+            data: 'email=' + email + '&password=' + password,
+            success: function(response, textStatus, jqXHR){
+                window.client.setup();
+            },
+            error: function(xhr, status, error) {
+                alert('Lo sentimos. El email y la contraseña no coinciden.');
             },
             dataType: 'json'
         });
-
-        /*var email = this.model.get('email');
-        var pword = this.model.get('password');
-        alert("You logged in as " + email + " and a password of " + pword);
-        return false;*/
-        //alert('hola');
     },
 
     render: function() {
         $(this.el).html(this.markup);
         return this;
+    },
+
+    validateForm: function(email, password) {
+        if (!isEmail(email)) {
+            alert('El email no es v&aacute;lido.');
+            return false;
+        }
+        if (password == '') {
+            alert('La contraseña no puede ser vacía.');
+            return false;
+        }
+        return true;
     }
 });

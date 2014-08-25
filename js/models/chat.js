@@ -1,1 +1,3 @@
-window.Chat = Backbone.Model.extend({});
+window.Chat = Backbone.Model.extend({
+	
+});

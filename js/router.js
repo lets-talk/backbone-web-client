@@ -7,14 +7,19 @@ window.LetsTalkApp = new (Backbone.Router.extend({
   },
 
   index: function(){
-    this.loginView = new LoginView();
-    this.loginView.render();
-    //$('#app').html(this.todosView.el);
-    //this.todoItems.fetch();
+    if ($.cookie('auth_token')) {
+      this.chatView = new ChatView();
+      this.chatView.render();
+    }
+    else {
+      this.loginView = new LoginView();
+      this.loginView.render();
+    }
   },
 
   start: function(){
     Backbone.history.start();
+    this.client = new Client();
 
   },
 
