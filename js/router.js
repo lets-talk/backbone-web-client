@@ -3,13 +3,16 @@ window.LetsTalkApp = new (Backbone.Router.extend({
     "": "index"
   },
 
-  initialize: function(){
+  initialize: function() {
+    this.client = new Client();
+    this.baseURL = 'http://api.staging.letsta.lk';
   },
 
-  index: function(){
-    if ($.cookie('auth_token')) {
-      this.chatView = new ChatView();
-      this.chatView.render();
+  index: function() {
+    if (this.client.exists()) {
+      this.chats = new Chats();
+      this.chatView = new ChatsView({collection: this.chats});
+      this.chats.fetch();
     }
     else {
       this.loginView = new LoginView();
@@ -17,12 +20,10 @@ window.LetsTalkApp = new (Backbone.Router.extend({
     }
   },
 
-  start: function(){
+  start: function() {
     Backbone.history.start();
-    this.client = new Client();
-
   },
 
-  show: function(id){
+  show: function(id) {
   }
 }));
