@@ -1,5 +1,5 @@
 window.ChatsView = Backbone.View.extend({
-    //el: "#chats",
+    el: "#chats",
     events: {
         "click a#logout": "logout"
     },
@@ -8,16 +8,16 @@ window.ChatsView = Backbone.View.extend({
         var self = this;
         this.markup = $("#chat-view-template").html();
 
-        this.collection.on('fetch', function(){
+        this.collection.on('reset', function(){
             console.log('hola!');
         })
     },
 
     render: function() {
-        console.log('fui llamada');
-        //this.collection.forEach(this.addChat, this);
-        //$(this.el).html(this.markup);
-        //return this;
+        
+        this.collection.forEach(this.addChat, this);
+        $(this.el).html(this.markup);
+        return this;
     },
 
     logout: function(e){

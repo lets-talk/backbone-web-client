@@ -8,6 +8,6 @@ window.Chats = Backbone.Collection.extend({
   },
 
   initialize: function(){
-
+  	
   }
 });

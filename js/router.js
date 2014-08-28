@@ -1,21 +1,23 @@
 window.LetsTalkApp = new (Backbone.Router.extend({
   routes: {
-    "": "index"
+    "": "index",
+    "chats": "chats",
+    "chat/:id": "chat",
   },
 
   initialize: function() {
     this.client = new Client();
     this.baseURL = 'http://api.staging.letsta.lk';
+    this.loginView = new LoginView();
+    console.log('hola');
   },
 
   index: function() {
-    if (this.client.exists()) {
-      this.chats = new Chats();
-      this.chatView = new ChatsView({collection: this.chats});
-      this.chats.fetch();
-    }
+    if (this.client.exists())
+      this.navigate('chats', {trigger: true});
+
     else {
-      this.loginView = new LoginView();
+      console.log('hola2');
       this.loginView.render();
     }
   },
@@ -24,6 +26,26 @@ window.LetsTalkApp = new (Backbone.Router.extend({
     Backbone.history.start();
   },
 
-  show: function(id) {
+  chats: function() {
+
+    if (!this.client.exists()) {
+      this.navigate('');
+      return;
+    }
+
+    this.loginView.hide();
+
+    this.chats = new Chats();
+
+    /*this.chats.on('reset', function(){
+      console.log('gola2');
+    });*/
+
+    this.chatsView = new ChatsView({collection: this.chats});
+    this.chats.fetch();
+    //this.chatsView.render();
+  },
+
+  chat: function(id) {
   }
 }));

@@ -1,5 +1,5 @@
 window.ChatView = Backbone.View.extend({
-    el: "#chats",
+    el: "ul#chat-list",
     model: Chat,
 
     render: function() {

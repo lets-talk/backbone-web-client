@@ -7,9 +7,10 @@ window.LoginView = Backbone.View.extend({
         "submit form": "login"
     },
 
-    initialize: function(){
+    initialize: function(baseURL){
         this.markup = $("#login-form-template").html();
-        this.url = window.LetsTalkApp.baseURL + '/api/v1/tokens/client';
+        //this.url = window.LetsTalkApp.baseURL + '/api/v1/tokens/client';
+        this.url = 'http://api.staging.letsta.lk/api/v1/tokens/client';
     },
 
     login: function(e) {
@@ -18,7 +19,7 @@ window.LoginView = Backbone.View.extend({
         var email = $("#email").val();
         var password = $("#password").val();
 
-        if(!this.validateForm(email, password)) return
+        if(!this.validateForm(email, password)) return;
 
         $.ajax({
             type: 'POST',
@@ -26,6 +27,7 @@ window.LoginView = Backbone.View.extend({
             data: 'email=' + email + '&password=' + password,
             success: function(response, textStatus, jqXHR) {
                 window.LetsTalkApp.client.setup(response["person"]["id"], response["person"]["email"], response["token"]);
+                window.LetsTalkApp.navigate('chats', {trigger: true});
             },
             error: function(xhr, status, error) {
                 alert('Lo sentimos. El email y la contraseña no coinciden.');
