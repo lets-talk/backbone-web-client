@@ -9,7 +9,6 @@ window.LetsTalkApp = new (Backbone.Router.extend({
     this.client = new Client();
     this.baseURL = 'http://api.staging.letsta.lk';
     this.loginView = new LoginView();
-    console.log('hola');
   },
 
   index: function() {
@@ -17,7 +16,6 @@ window.LetsTalkApp = new (Backbone.Router.extend({
       this.navigate('chats', {trigger: true});
 
     else {
-      console.log('hola2');
       this.loginView.render();
     }
   },
