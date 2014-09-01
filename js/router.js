@@ -16,6 +16,7 @@ window.LetsTalkApp = new (Backbone.Router.extend({
       this.navigate('chats', {trigger: true});
 
     else {
+      $('div#chats').hide();
       this.loginView.render();
     }
   },
@@ -31,19 +32,26 @@ window.LetsTalkApp = new (Backbone.Router.extend({
       return;
     }
 
-    this.loginView.hide();
+    $('#login-form').hide();
+    $('div#chats').show();
 
     this.chats = new Chats();
 
-    /*this.chats.on('reset', function(){
-      console.log('gola2');
-    });*/
-
     this.chatsView = new ChatsView({collection: this.chats});
-    this.chats.fetch();
-    //this.chatsView.render();
+
+    this.chats.fetch({reset: true});
+    this.chatsView.render();
+    $('div#chats').append(this.chatsView.el);
+
   },
 
   chat: function(id) {
+    if (!this.client.exists()) {
+      this.navigate('');
+      return;
+    }
+
+
+
   }
 }));
