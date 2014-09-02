@@ -1,13 +1,17 @@
 div.app-container{ text-align: center;}
 
+div#app{ width: 100% }
+
 div#chats {margin: 20px 0;}
 
 div.chats-loading{ margin: 10px 0;}
 
 ul#chat-list{ padding-left: 0; margin: 20px 0; overflow-y: scroll; height: 200px}
-ul#chat-list li{ list-style: none; height: 50px; border: solid 1px; text-align: left; padding: 13px 0 0 10px;}
-ul#chat-list li a{ color: #000;}
+ul#chat-list li{ list-style: none; min-height: 90px; border-bottom: 1px solid #ccc; text-align: left; padding: 20px 0 20px 10px; display: table; width: 100%; }
+ul#chat-list li img { border-radius: 100%; float: left; margin-right: 20px;}
+ul#chat-list li div.message{ color: #000; float: left; width: 75%;}
+ul#chat-list li div.message a{ font-size: 1.2em; font-weight: 400; color: #000; }
+ul#chat-list li div.message p.last_message{ font-size: 0.8em; width: 90%; margin: 5px 0; color: #ccc;}
 
 ul#chat-messages{ padding-left: 0; margin: 20px 0; overflow-y: scroll; height: 200px}
-ul#chat-messages li{ list-style: none; height: 50px; border: solid 1px; text-align: left; padding: 13px 0 0 10px;}
-ul#chat-messages li a{ color: #000;}
+ul#chat-messages li{ list-style: none; height: auto; border: solid 1px; text-align: left; padding: 20px 0 20px 10px; width: 100%; display: table;}
