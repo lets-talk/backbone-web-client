@@ -14,4 +14,6 @@ ul#chat-list li div.message a{ font-size: 1.2em; font-weight: 400; color: #000; 
 ul#chat-list li div.message p.last_message{ font-size: 0.8em; width: 90%; margin: 5px 0; color: #ccc;}
 
 ul#chat-messages{ padding-left: 0; margin: 20px 0; overflow-y: scroll; height: 200px}
-ul#chat-messages li{ list-style: none; height: auto; border: solid 1px; text-align: left; padding: 20px 0 20px 10px; width: 100%; display: table;}
+ul#chat-messages li{ list-style: none; height: auto; padding: 20px 10px; width: 100%; display: table; border-bottom: 1px solid #ccc;}
+ul#chat-messages li.left{ text-align: left; }
+ul#chat-messages li.right{ text-align: right; }

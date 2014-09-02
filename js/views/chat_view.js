@@ -11,6 +11,8 @@ window.ChatView = Backbone.View.extend({
         if(this.collection.length > 0) {
             this.collection.forEach(this.addMessage, this);
             chatsLoading.hide();
+
+            this.$el.position().top;
         }
         else 
             chatsLoading.show();
