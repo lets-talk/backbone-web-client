@@ -22,11 +22,8 @@
 		<div class="row">
 			<div class="col-md-offset-5 col-md-2 col-md-offset-5 app-container">
 				<h3>Bienvenido a Let's Talk</h3>
-				<div id="login-form"></div>
-				<div id="chats">
-					<a id="logout" href="#">Salir</a>
-					<div class="chats-loading">Cargando...</div>
-					<ul id="chat-list"></ul>
+				<div id="app">
+					
 				</div>
 			</div>
 		</div>
@@ -47,9 +44,11 @@
 </template>
 
 <template id="chat-view-template">
-	<ul id="chat-list">
-		
-	</ul>
+	<div id="chats">
+		<a id="logout" href="#">Salir</a>
+		<div class="chats-loading">Cargando...</div>
+		<ul id="chat-list"></ul>
+	</div>
 </template>
 
 <!-- Models -->

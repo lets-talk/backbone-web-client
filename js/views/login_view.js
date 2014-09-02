@@ -1,6 +1,5 @@
 window.LoginView = Backbone.View.extend({
-    el: "#login-form",
-
+    id: "login-form",
     model: new Backbone.Model(),
 
     events: {
@@ -37,7 +36,7 @@ window.LoginView = Backbone.View.extend({
     },
 
     render: function() {
-        $(this.el).html(this.markup);
+        this.$el.append(this.markup);
         return this;
     },
 

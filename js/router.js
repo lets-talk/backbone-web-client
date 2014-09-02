@@ -3,21 +3,26 @@ window.LetsTalkApp = new (Backbone.Router.extend({
     "": "index",
     "chats": "chats",
     "chat/:id": "chat",
+    "logout": "logout"
   },
 
   initialize: function() {
     this.client = new Client();
     this.baseURL = 'http://api.staging.letsta.lk';
-    this.loginView = new LoginView();
   },
 
   index: function() {
+
+    var app = $('div#app');
+    app.html('');
+
     if (this.client.exists())
       this.navigate('chats', {trigger: true});
 
     else {
-      $('div#chats').hide();
-      this.loginView.render();
+      var loginView = new LoginView();
+      loginView.render();
+      app.html(loginView.el);
     }
   },
 
@@ -25,23 +30,30 @@ window.LetsTalkApp = new (Backbone.Router.extend({
     Backbone.history.start();
   },
 
+  logout: function() {
+    this.client.reset();
+    this.navigate('', {trigger: true});
+  },
+
   chats: function() {
+
+    var app = $('div#app');
+    app.html('');
 
     if (!this.client.exists()) {
       this.navigate('');
       return;
     }
 
-    $('#login-form').hide();
-    $('div#chats').show();
-
     this.chats = new Chats();
-
-    this.chatsView = new ChatsView({collection: this.chats});
+    var chatsView = new ChatsView({collection: this.chats});
 
     this.chats.fetch({reset: true});
-    this.chatsView.render();
-    $('div#chats').append(this.chatsView.el);
+    chatsView.render();
+    console.log(chatsView.el);
+    app.append('<div class="chats-loading">Cargando...</div>');
+    app.append(chatsView.el);
+    app.append('<a href="#logout">Salir</a>');
 
   },
 
@@ -50,6 +62,9 @@ window.LetsTalkApp = new (Backbone.Router.extend({
       this.navigate('');
       return;
     }
+
+    var app = $('div#app');
+    app.html('');
 
 
 

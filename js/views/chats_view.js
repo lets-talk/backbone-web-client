@@ -1,12 +1,13 @@
 window.ChatsView = Backbone.View.extend({
-    el: "ul#chat-list",
+    tagName: 'ul',
+    id: "chat-list",
     events: {
         "click a#logout": "logout"
     },
 
     initialize: function(){
         var self = this;
-        //this.markup = $("#chat-view-template").html();
+        this.markup = $("#chat-view-template").html();
         this.collection.on('reset', this.render, this);
     },
 
@@ -15,17 +16,10 @@ window.ChatsView = Backbone.View.extend({
             this.collection.forEach(this.addChat, this);
             $('div.chats-loading').hide();    
         }
-        
-        //this.$el.html(this.markup);
+
         return this;
     },
-
-    logout: function(e) {
-        e.preventDefault();
-        window.LetsTalkApp.client.reset();
-        window.LetsTalkApp.navigate('/', {trigger: true});
-    },
-
+    
     addChat: function(chat) {
         var chatView = new ChatView({model: chat});
         chatView.render();
