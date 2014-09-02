@@ -3,6 +3,6 @@ window.MessageView = Backbone.View.extend({
     model: Message,
 
     render: function() {
-    	this.$el.append('mensaje');
+    	this.$el.append(this.model.get('content'));
     }
 });

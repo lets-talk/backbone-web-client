@@ -1,1 +1,3 @@
-window.Message = Backbone.Model.extend({});
+window.Message = Backbone.Model.extend({
+	
+});

@@ -41,7 +41,7 @@ window.LetsTalkApp = new (Backbone.Router.extend({
     app.html('');
 
     if (!this.client.exists()) {
-      this.navigate('');
+      this.navigate('', {trigger: true});
       return;
     }
 
@@ -50,7 +50,7 @@ window.LetsTalkApp = new (Backbone.Router.extend({
 
     this.chats.fetch({reset: true});
     chatsView.render();
-    console.log(chatsView.el);
+
     app.append('<div class="chats-loading">Cargando...</div>');
     app.append(chatsView.el);
     app.append('<a href="#logout">Salir</a>');
@@ -66,7 +66,15 @@ window.LetsTalkApp = new (Backbone.Router.extend({
     var app = $('div#app');
     app.html('');
 
+    this.messages = new Messages({conversationId: id});
+    
+    var chatView = new ChatView({collection: this.messages});
 
+    this.messages.fetch({reset: true});
+
+    app.append('<div class="chats-loading">Cargando conversaci&oacute;n...</div>');
+    app.append(chatView.el);
+    app.append('<a href="#logout">Salir</a>');
 
   }
 }));
