@@ -1,5 +1,5 @@
 window.ChatView = Backbone.View.extend({
-    tagName: 'ul',
+    tagName: 'ol',
     id: "chat-messages",
 
     initialize: function(){
