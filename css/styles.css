@@ -2,13 +2,21 @@ body {
 	font-family: sans-serif;
 }
 
-div.app-container{ text-align: center;}
+div.app-container{ 
+	text-align: center;
+}
 
-div#app{ width: 100% }
+div#app { 
+	width: 100%;
+}
 
-div#chats {margin: 20px 0;}
+div#chats {
+	margin: 20px 0;
+}
 
-div.chats-loading{ margin: 10px 0;}
+div.chats-loading {
+	margin: 10px 0;
+}
 
 ul#chat-list { 
 	padding-left: 0; 
@@ -17,10 +25,33 @@ ul#chat-list {
 	height: 300px
 }
 
-ul#chat-list li{ list-style: none; min-height: 90px; border-bottom: 1px solid #ccc; text-align: left; padding: 20px 0 20px 10px; display: table; width: 100%; }
-ul#chat-list li img { border-radius: 100%; float: left; margin-right: 20px;}
-ul#chat-list li div.message{ color: #000; float: left; width: 65%;}
-ul#chat-list li div.message a{ font-size: 1.2em; font-weight: 400; color: #000; }
+ul#chat-list li {
+	list-style: none;
+	min-height: 90px;
+	border-bottom: 1px solid #ccc;
+	text-align: left;
+	padding: 20px 0 20px 10px;
+	display: table;
+	width: 100%;
+}
+
+ul#chat-list li img { 
+	border-radius: 100%;
+	float: left;
+	margin-right: 20px; 
+}
+
+ul#chat-list li div.message {
+	color: #000;
+	float: left;
+	width: 65%;
+}
+
+ul#chat-list li div.message a{
+	font-size: 1.2em;
+	font-weight: 400;
+	color: #000;
+}
 
 ul#chat-list li div.message p.last_message{ 
 	font-size: 0.8em;

@@ -4,7 +4,7 @@ window.Chats = Backbone.Collection.extend({
   	return window.LetsTalkApp.baseURL + '/conversations?auth_token=' + window.LetsTalkApp.client.get('userAuthToken') + 
   		'&sync_time=' + window.LetsTalkApp.client.get('syncTime') + 
   		'&client_id=' + window.LetsTalkApp.client.get('userId') + 
-  		'&filter_empty_conversations=true';
+  		'&filter_empty_conversations=true&organzation_id=1';
   },
 
   initialize: function(){
