@@ -163,6 +163,11 @@
             $.post(config.basePath + sprintf(config.newChatPath, this.get('authToken')), tempInput, function(data)
             {
                 _this.set({ name : input.name, mail : input.mail, image : input.image, conversationID: data.id });
+
+                //Updating user sync time
+
+                if (data.response_server_time)
+                    _this.set({ syncTime: data.response_server_time })
                 
                 _this.trigger('login:success');
             });
@@ -308,7 +313,7 @@
             _.each(messages, function(message)
             {
                 if (message.replied_on)
-                    _this.set({syncTime: message.replied_on})  
+                    _this.set({ syncTime: message.replied_on })
 
                 if(!message.created_at && message.time)
                     message.created_at = message.time.getTime();
@@ -430,22 +435,26 @@
             
             var _this = this;
             
-            $.post(config.basePath + sprintf(config.sendMessagePath, this.get('conversationID'), this.get('authToken')), input, function(data)
-            {
-                if(data.success)
-                {
+            $.ajax({
+                type: "POST",
+                url: config.basePath + sprintf(config.sendMessagePath, this.get('conversationID'), this.get('authToken')),
+                data: input,
+                success: function(data){
+                    
+                    //Updating user sync time
+
+                    if (data.created_at)
+                        _this.set({ syncTime: data.created_at })
+
                     // Notify success
                     
                     _this.trigger('messages:sent');
-                }
-                else
-                {
-                    // Notify error
                     
+                    if(callback) callback(data);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
                     _this.trigger('messages:sendError');
                 }
-                
-                if(callback) callback(data);
             });
             
             // Store the message
