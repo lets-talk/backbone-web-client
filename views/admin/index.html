@@ -536,7 +536,7 @@
                 serverTimeDifference : (new Date('<?php echo date("Y-m-d H:i:s") ?>'.replace(/-/g,"/")).getTime() / 1000) - (new Date().getTime() / 1000),
                 
                 rootPath : '<?php echo $app->asset("") ?>',
-                basePath : 'http://demo.staging.letsta.lk',
+                basePath : 'http://54.183.100.51',
 
                 templatesPath : '<?php echo $app->path("Admin:templates") ?>',
                 
@@ -574,15 +574,15 @@
                     
                     installed      : '<?php echo $vars["installed"] ?>',
                     messageSound   : '<?php echo $vars["messageSound"] ?>',
-                    timeDaysAgo    : 'days(s) ago',
-                    timeHoursAgo   : 'hour(s) ago',
-                    timeMinutesAgo : 'minute(s) ago',
-                    timeSecondsAgo : 'second(s) ago'
+                    timeDaysAgo    : 'día(s) ago',
+                    timeHoursAgo   : 'hora(s) ago',
+                    timeMinutesAgo : 'minuto(s) ago',
+                    timeSecondsAgo : 'segundo(s) ago'
                 },
                 
                 defaultAvatars : JSON.parse('<?php echo $vars["defaultAvatars"] ?>'),
 
-                organizationID: '1'
+                organizationID: '3'
             };
             
             // Logged-in user info

@@ -12,10 +12,10 @@
             
             name : 'anonymous',
             mail : '',
-            authToken: 'mAmhZYjuiGvqbDoEsmUq',
+            authToken: '1mSydUZnPnggMeqg9KWJ',
             conversationID: '',
             email: 'guest@letsta.lk',
-            guestID: '38',
+            guestID: '138',
             syncTime: ''
         },
         
@@ -155,7 +155,7 @@
             var _this = this;
 
             var tempInput = {
-                issue: '',
+                issue: input.mail,
                 organization_id: config.organizationID,
                 client_id: this.get('guestID')
             };
