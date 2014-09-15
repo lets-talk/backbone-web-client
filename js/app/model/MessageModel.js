@@ -33,7 +33,6 @@
 
             if(attributes)
             {
-                console.log('creando mensaje: ' + attributes);
                 if(attributes.created_at) this.set('time', new Date());
 
                 //if(attributes.datetime) this.set('time', new Date(attributes.datetime.replace(/-/g,"/")));
