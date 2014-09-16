@@ -12,10 +12,10 @@
             
             name : 'anonymous',
             mail : '',
-            authToken: '1mSydUZnPnggMeqg9KWJ',
+            authToken: 'mAmhZYjuiGvqbDoEsmUq',
             conversationID: '',
             email: 'guest@letsta.lk',
-            guestID: '138',
+            guestID: '38',
             syncTime: ''
         },
         
@@ -29,7 +29,15 @@
         {
             // Handle chatting features
 
-            this.set({syncTime: this.oldDate()});
+            if($.cookie('customer-chat-sync-time'))
+            {
+                this.set({syncTime: $.cookie('customer-chat-sync-time')});
+            }
+            else
+            {
+                this.set({syncTime: this.oldDate()});
+            }
+            
 
             this.once('operators:online', this.manageConnection, this);
             
@@ -167,7 +175,9 @@
                 //Updating user sync time
 
                 if (data.response_server_time)
-                    _this.set({ syncTime: data.response_server_time })
+                {
+                    _this.saveSyncTime(data.response_server_time);
+                }
                 
                 _this.trigger('login:success');
             });
@@ -313,7 +323,9 @@
             _.each(messages, function(message)
             {
                 if (message.replied_on)
-                    _this.set({ syncTime: message.replied_on })
+                {
+                    _this.saveSyncTime(message.replied_on);
+                }
 
                 if(!message.created_at && message.time)
                     message.created_at = message.time.getTime();
@@ -325,16 +337,6 @@
             // Save the messages
 
             this.lastMessages = this.lastMessages.concat(messages);
-
-            // Prepare the messages
-            
-            /*_.each(messages, function(message)
-            {
-                if(!message.datetime && message.time)
-                {
-                    message.datetime = message.time.getTime();
-                }
-            });
             
             // Store in the cookie
             
@@ -444,7 +446,9 @@
                     //Updating user sync time
 
                     if (data.created_at)
-                        _this.set({ syncTime: data.created_at })
+                    {
+                        _this.saveSyncTime(data.created_at);
+                    }
 
                     // Notify success
                     
@@ -485,6 +489,17 @@
                 _this.checkOperators();
             
             }, GuestChatModel.POLLING_INTERVAL);
+        },
+
+        saveSyncTime: function(st)
+        {
+            var date    = new Date();
+            var minutes = 10;
+            
+            date.setTime(date.getTime() + minutes * 60 * 1000);
+
+            $.cookie('customer-chat-sync-time', st, { expires : date });
+            _this.set({ syncTime: st })
         }
     },
     {

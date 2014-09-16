@@ -60,6 +60,13 @@
             }
             
             if(this.model.fromUser && this.model.fromUser.image) this.$('.avatar').css('background-image', 'url("' + this.model.fromUser.image + '")');
+
+            if(this.model.get('avatar').length !== 0 && this.model.get('avatar').length !== '')
+            {
+                this.$('.avatar').css('background-image', 'url("' + this.model.get('avatar') + '")');
+                this.$('.avatar').css('background-size', '40px 40px');
+            }
+
             
             // Initialize user info popover
             

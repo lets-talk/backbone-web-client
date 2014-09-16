@@ -13,16 +13,8 @@
             author       : '',
             content      : '',
             toAuthor     : 'all',
-            toAuthorMail : ''
-        },
-
-        parse: function(response)
-        {
-            console.log('response: ' + response);
-            if (response.person)
-                response.author = response.person.name;
-
-            return response;
+            toAuthorMail : '',
+            avatar       : ''
         },
 
         initialize : function(attributes, options)
@@ -73,6 +65,9 @@
                 {
                     if(this.get('author').length === 0)
                         this.set('author', attributes.person.name)
+
+                    if(this.get('avatar').length === 0)
+                        this.set('avatar', attributes.person.avatar)
                 }
                 
                 // ...

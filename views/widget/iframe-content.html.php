@@ -191,7 +191,7 @@
                 serverTimeDifference : (new Date('<?php echo date("Y-m-d H:i:s") ?>'.replace(/-/g,"/")).getTime() / 1000) - (new Date().getTime() / 1000),
                 
                 rootPath : '<?php echo $app->asset("") ?>',
-                basePath : 'http://54.183.100.51',
+                basePath : 'http://demo.staging.letsta.lk',
                 
                 templatesPath : '<?php echo $app->asset("views/widget-templates.html") ?>',
                 
@@ -214,7 +214,7 @@
                 
                 defaultAvatars : JSON.parse('<?php echo $vars["defaultAvatars"] ?>'),
 
-                organizationID: '3',
+                organizationID: '1',
                 
                 info : JSON.parse('<?php echo $vars["info"] ?>'),
                 
