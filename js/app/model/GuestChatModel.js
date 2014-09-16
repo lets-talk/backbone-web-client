@@ -37,6 +37,17 @@
             {
                 this.set({syncTime: this.oldDate()});
             }
+
+            if($.cookie('customer-chat-conversation-id'))
+            {
+                this.set({conversationID: $.cookie('customer-chat-conversation-id')});
+            }
+
+            if(this.checkGuestCache() && $.cookie('customer-chat-messages'))
+            {
+                this.lastMessages = JSON.parse($.cookie('customer-chat-messages'));
+                console.log(this.lastMessages);
+            }
             
 
             this.once('operators:online', this.manageConnection, this);
@@ -55,36 +66,25 @@
             // Check if user is already logged in
             
             var _this = this;
-            
-            $.post(config.isLoggedInPath, { info : JSON.stringify(config.info) }, function(data)
+
+            //Checking cookies
+
+            if (_this.checkGuestCache())
             {
-                if(data.success)
-                {
-                    // Store the login data
+                // Notify success
+
+                 _this.trigger('login:success');
+
+                 //Maybe useful
+
+                 //_this.set({ name : data.name, mail : data.mail, image : data.image });
+            }
+            else
+            {
+                // Notify about need to log in again
                     
-                    _this.set({ name : data.name, mail : data.mail, image : data.image });
-                    
-                    // Notify success
-                    
-                    _this.trigger('login:success');
-                    
-                    // Read previous messages if any
-                    
-                    $.get(config.lastMessagesPath, function(data)
-                    {
-                        if(data.success && data.messages.length > 0)
-                        {
-                            _this.trigger('messages:last', data.messages);
-                        }
-                    });
-                }
-                else
-                {
-                    // Notify about need to log in again
-                    
-                    _this.trigger('login:login');
-                }
-            });
+                _this.trigger('login:login');
+            }
         },
         
         login : function(input)
@@ -171,6 +171,8 @@
             $.post(config.basePath + sprintf(config.newChatPath, this.get('authToken')), tempInput, function(data)
             {
                 _this.set({ name : input.name, mail : input.mail, image : input.image, conversationID: data.id });
+
+                _this.saveConversationID(data.id);
 
                 //Updating user sync time
 
@@ -264,7 +266,7 @@
             
             var _this = this;
 
-            if (_this.get('conversationID') == '')
+            if (_this.get('conversationID').length === 0)
                 return;
             
             $.get(config.basePath + sprintf(config.newMessagesPath, _this.get('authToken'), _this.get('syncTime'), _this.get('guestID'), config.organizationID), function(data)
@@ -341,9 +343,8 @@
             // Store in the cookie
             
             var date    = new Date();
-            var minutes = 10;
             
-            date.setTime(date.getTime() + minutes * 60 * 1000);
+            date.setTime(date.getTime() + 10 * 60 * 1000);
             
             $.cookie('customer-chat-messages', JSON.stringify(this.lastMessages), { expires : date });
         },
@@ -491,15 +492,30 @@
             }, GuestChatModel.POLLING_INTERVAL);
         },
 
+        checkGuestCache: function()
+        {
+            return $.cookie('customer-chat-conversation-id') && $.cookie('customer-chat-sync-time');
+        },
+
         saveSyncTime: function(st)
         {
+            var _this = this;
+
             var date    = new Date();
-            var minutes = 10;
             
-            date.setTime(date.getTime() + minutes * 60 * 1000);
+            date.setTime(date.getTime() + 10 * 60 * 1000);
 
             $.cookie('customer-chat-sync-time', st, { expires : date });
             _this.set({ syncTime: st })
+        },
+
+        saveConversationID: function(cid)
+        {
+            var date    = new Date();
+            
+            date.setTime(date.getTime() + 10 * 60 * 1000);
+
+            $.cookie('customer-chat-conversation-id', cid, { expires : date });
         }
     },
     {

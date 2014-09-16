@@ -196,7 +196,6 @@
                 templatesPath : '<?php echo $app->asset("views/widget-templates.html") ?>',
                 
                 isOperatorOnlinePath   : '<?php echo $app->path("Operator:isOnline") ?>',
-                isLoggedInPath         : '<?php echo $app->path("Authentication:isGuestLoggedIn") ?>',
                 loginPath              : '<?php echo $app->path("Authentication:loginGuest") ?>',
                 logoutPath             : '<?php echo $app->path("Authentication:logoutGuest") ?>',
                 keepAlivePath          : '<?php echo $app->path("Guest:stayAlive") ?>',
