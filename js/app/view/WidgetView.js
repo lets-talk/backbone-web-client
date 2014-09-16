@@ -1,3 +1,4 @@
+
 //==============================================================================
 //
 //  Widget view
@@ -192,17 +193,21 @@
                     this.$title.html(config.ui.chatHeader);
                     
                     // Add last messages to the chat
-                    
+
                     for(var i = 0; i < this.model.lastMessages.length; i++)
                     {
                         var msgData = this.model.lastMessages[i];
-                        
+                        var author = msgData.authorType === 'guest' ? msgData.author : '';
+                        if (msgData.person)
+                            author = msgData.person.name;
+
                         var message = new app.MessageModel({
                         
                             authorType : msgData.authorType,
-                            author     : msgData.authorType === 'guest' ? msgData.author : this.model.getOperatorName(msgData.from_id),
-                            content    : msgData.body,
-                            time       : new Date(msgData.datetime)
+                            author     : author,
+                            content    : msgData.content,
+                            time       : new Date(msgData.datetime),
+                            avatar     : msgData.person ? msgData.person.avatar : ''
                         });
                         
                         // Add message to the chat box
@@ -509,7 +514,7 @@
                 var msgData = messages[i];
                 
                 msgData.authorType = 'operator';
-                msgData.author     = this.model.getOperatorName(msgData.from_id);
+                msgData.author     = msgData.person ? msgData.person.name : 'Operator';
                 
                 var message = new app.MessageModel(msgData);
                 

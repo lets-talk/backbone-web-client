@@ -67,7 +67,6 @@
                 this.$('.avatar').css('background-size', '40px 40px');
             }
 
-            
             // Initialize user info popover
             
             if(app.UserInfoPopoverView)

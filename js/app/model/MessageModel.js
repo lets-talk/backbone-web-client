@@ -23,12 +23,16 @@
             
             // Initialize fields if stored as server-side data
 
+            console.log('cargando mensaje');
+            console.log(this.attributes);
+
             if(attributes)
             {
-                if(attributes.created_at) this.set('time', new Date());
+                if(attributes.datetime && typeof attributes.datetime === 'string')
+                {
+                    this.set('time', new Date(attributes.datetime.replace(/-/g,"/")));
+                }
 
-                //if(attributes.datetime) this.set('time', new Date(attributes.datetime.replace(/-/g,"/")));
-                
                 if(typeof attributes.from_user_info === 'string' && attributes.from_user_info !== 'all')
                 {
                     try      { attributes.from_user_info = JSON.parse(attributes.from_user_info); }
@@ -63,8 +67,7 @@
 
                 if(typeof attributes.person === 'object')
                 {
-                    if(this.get('author').length === 0)
-                        this.set('author', attributes.person.name)
+                    this.set('author', attributes.person.name)
 
                     if(this.get('avatar').length === 0)
                         this.set('avatar', attributes.person.avatar)

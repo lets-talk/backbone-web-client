@@ -29,18 +29,20 @@
         {
             // Handle chatting features
 
-            if($.cookie('customer-chat-sync-time'))
+            if($.cookie('customer-chat-guest-data'))
             {
-                this.set({syncTime: $.cookie('customer-chat-sync-time')});
+                var data = JSON.parse($.cookie('customer-chat-guest-data'));
+                this.set({ 
+                    name : data.name,
+                    mail : data.mail,
+                    authToken : data.authToken,
+                    conversationID: data.conversationID,
+                    syncTime : data.syncTime
+                });
             }
             else
             {
                 this.set({syncTime: this.oldDate()});
-            }
-
-            if($.cookie('customer-chat-conversation-id'))
-            {
-                this.set({conversationID: $.cookie('customer-chat-conversation-id')});
             }
 
             if(this.checkGuestCache() && $.cookie('customer-chat-messages'))
@@ -69,7 +71,7 @@
 
             //Checking cookies
 
-            if (_this.checkGuestCache())
+            if (_this.checkGuestCache() && $.cookie('customer-chat-messages'))
             {
                 // Notify success
 
@@ -144,6 +146,10 @@
                     }
                 });
             });
+
+            // Clear guest data cache
+
+            $.removeCookie('customer-chat-guest-data', { path: '/' });
             
             // Clear messages cache
             
@@ -171,14 +177,14 @@
             $.post(config.basePath + sprintf(config.newChatPath, this.get('authToken')), tempInput, function(data)
             {
                 _this.set({ name : input.name, mail : input.mail, image : input.image, conversationID: data.id });
-
-                _this.saveConversationID(data.id);
+                _this.cacheGuestData();
 
                 //Updating user sync time
 
                 if (data.response_server_time)
                 {
-                    _this.saveSyncTime(data.response_server_time);
+                    _this.set({ syncTime: data.response_server_time })
+                    _this.cacheGuestData();
                 }
                 
                 _this.trigger('login:success');
@@ -326,14 +332,16 @@
             {
                 if (message.replied_on)
                 {
-                    _this.saveSyncTime(message.replied_on);
+                    _this.set({ syncTime: message.replied_on })
+                    _this.cacheGuestData();
                 }
 
-                if(!message.created_at && message.time)
-                    message.created_at = message.time.getTime();
-
-                /*if (message.person)
-                    message.author = message.person.name;*/
+                if(!message.datetime && message.time)
+                    message.datetime = message.time.getTime();
+                else
+                    message.time = new Date();
+                    message.datetime = message.time.getTime();
+                
             });
 
             // Save the messages
@@ -342,7 +350,7 @@
             
             // Store in the cookie
             
-            var date    = new Date();
+            var date = new Date();
             
             date.setTime(date.getTime() + 10 * 60 * 1000);
             
@@ -448,7 +456,8 @@
 
                     if (data.created_at)
                     {
-                        _this.saveSyncTime(data.created_at);
+                        _this.set({ syncTime: data.created_at })
+                        _this.cacheGuestData();
                     }
 
                     // Notify success
@@ -494,28 +503,25 @@
 
         checkGuestCache: function()
         {
-            return $.cookie('customer-chat-conversation-id') && $.cookie('customer-chat-sync-time');
+            return $.cookie('customer-chat-guest-data');
         },
 
-        saveSyncTime: function(st)
+        cacheGuestData: function()
         {
             var _this = this;
 
-            var date    = new Date();
-            
+            var date = new Date();
             date.setTime(date.getTime() + 10 * 60 * 1000);
 
-            $.cookie('customer-chat-sync-time', st, { expires : date });
-            _this.set({ syncTime: st })
-        },
+            var data = {
+                name: _this.get('name'),
+                mail: _this.get('mail'),
+                authToken: _this.get('authToken'),
+                conversationID: _this.get('conversationID'),
+                syncTime: _this.get('syncTime')
+            }
 
-        saveConversationID: function(cid)
-        {
-            var date    = new Date();
-            
-            date.setTime(date.getTime() + 10 * 60 * 1000);
-
-            $.cookie('customer-chat-conversation-id', cid, { expires : date });
+            $.cookie('customer-chat-guest-data', JSON.stringify(data), { expires : date });
         }
     },
     {
