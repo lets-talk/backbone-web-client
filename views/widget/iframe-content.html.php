@@ -82,6 +82,9 @@
                 <div class="customer-chat-content-message-input">
                     <input id="customer-chat-login-mail" type="text" class="customer-chat-content-message-input-field" placeholder="<?php echo $vars['ui']['contactMailLabel'] ?>" />
                 </div>
+                <!--div class="customer-chat-content-message-input">
+                    <input id="customer-chat-login-password" type="password" class="customer-chat-content-message-input-field" placeholder="Tu contrase&ntilde;a" />
+                </div-->
                 <div class="customer-chat-content-row">
                     <a href="#" id="customer-chat-login-start" class="customer-chat-content-button"><?php echo $vars['ui']['startLabel'] ?> <i class="icon-circle-arrow-right icon-white" style="margin: 3px 0 0 3px;"></i></a>
                 </div>
@@ -191,8 +194,8 @@
                 serverTimeDifference : (new Date('<?php echo date("Y-m-d H:i:s") ?>'.replace(/-/g,"/")).getTime() / 1000) - (new Date().getTime() / 1000),
                 
                 rootPath : '<?php echo $app->asset("") ?>',
-                //basePath : 'http://demo.staging.letsta.lk',
-                basePath : 'http://54.183.100.51',
+                basePath : 'http://demo.staging.letsta.lk',
+                //basePath : 'http://54.183.100.51',
                 
                 templatesPath : '<?php echo $app->asset("views/widget-templates.html") ?>',
                 
@@ -214,7 +217,7 @@
                 
                 defaultAvatars : JSON.parse('<?php echo $vars["defaultAvatars"] ?>'),
 
-                organizationID: '3',
+                organizationID: '1',
                 
                 info : JSON.parse('<?php echo $vars["info"] ?>'),
                 

@@ -47,7 +47,8 @@
             body = this.prepareMessage(body);
             
             this.$('.customer-chat-content-message-author').html(this.model.getReadableName() || this.model.get('author'));
-            this.$('.customer-chat-content-message-body')  .html(body);
+
+            this.$('.customer-chat-content-message-body').html(body);
             
             this.updateTime(true);
             
@@ -216,7 +217,12 @@
             {
             }
             
-            return '<a href="' + url + '" target="_blank">' + text + '</a>';
+            return '<a href="' + url + '" target="_blank"><img src="' + config.rootPath + 'img/icon-link.png' + '" /></a>';
+        },
+
+        validateURL: function(url)
+        {
+            return (/^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(url));
         }
     });
 

@@ -23,9 +23,6 @@
             
             // Initialize fields if stored as server-side data
 
-            console.log('cargando mensaje');
-            console.log(this.attributes);
-
             if(attributes)
             {
                 if(attributes.datetime && typeof attributes.datetime === 'string')
