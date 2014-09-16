@@ -12,10 +12,10 @@
             
             name : 'anonymous',
             mail : '',
-            authToken: 'mAmhZYjuiGvqbDoEsmUq',
+            authToken: '1mSydUZnPnggMeqg9KWJ',
             conversationID: '',
             email: 'guest@letsta.lk',
-            guestID: '38',
+            guestID: '138',
             syncTime: ''
         },
         
