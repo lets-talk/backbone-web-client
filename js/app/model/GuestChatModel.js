@@ -126,25 +126,20 @@
             
             var _this = this;
             
-            this.sendMessage(new app.MessageModel({ content : '[ user has closed the chat ]' }), function()
-            {
-                // Send a logout request
-                
-                $.post(config.logoutPath, function(data)
-                {
-                    if(data && data.success)
-                    {
-                        // Notify about successful log-out
-
-                        _this.trigger('logout:success');
-                    }
-                    else
-                    {
-                        // Notify about log-out error
-
-                        _this.trigger('logout:error');
-                    }
-                });
+            // Send a logout request
+            
+            $.ajax({
+                type: "PUT",
+                url: config.basePath + sprintf(config.updateChatPath, this.get('conversationID'), this.get('authToken')),
+                data: { status : 'Closed' },
+                success: function(data){
+                    
+                    _this.trigger('logout:success');
+                    
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    _this.trigger('logout:error');
+                }
             });
 
             // Clear guest data cache

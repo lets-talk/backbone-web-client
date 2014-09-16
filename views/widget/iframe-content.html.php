@@ -212,6 +212,7 @@
                 getOperatorPath        : '<?php echo $app->path("Operator:get") ?>',
                 contactPath            : '<?php echo $app->path("Contact:contact") ?>',
                 newChatPath            : '/conversations?auth_token=%s',
+                updateChatPath         : '/conversations/%s?auth_token=%s',
                 
                 ui : JSON.parse('<?php echo $vars["uiJson"] ?>'),
                 
