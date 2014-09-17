@@ -1,4 +1,3 @@
-
 //==============================================================================
 //
 //  Widget view
@@ -66,8 +65,8 @@
             
             // Cache view components
             
+            this.$window              = $(window);
             this.$html                = $('html');
-            this.$frame               = $(window.frameElement);
             this.$header              = this.$('.customer-chat-header');
             this.$title               = this.$('.customer-chat-header-title');
             this.$mobileTitle         = $('#mobile-widget i');
@@ -104,7 +103,7 @@
             
             this.model.once('operators:online', function()
             {
-                this.$frame.show();
+                this.postMessage('show');
                 
                 this.initialized = true;
                 
@@ -114,11 +113,11 @@
             {
                 if(!this.initialized && config.ui.hideWhenOffline === 'true')
                 {
-                    this.$frame.hide();
+                    this.postMessage('hide');
                 }
                 else
                 {
-                    this.$frame.show();
+                    this.postMessage('show');
                 }
             
             }, this);
@@ -150,6 +149,10 @@
             this.settings.on('change', this.renderSettings, this);
             
             this.renderSettings();
+            
+            // Handle frames communication
+            
+            this.initFramesCommunication();
             
             // Start up
             
@@ -280,7 +283,7 @@
                 if(this.prevFullscreen) this.fullscreenOn();
             }
             
-            this.$frame.animate({ bottom : bottom }, WidgetView.ANIMATION_TIME);
+            this.postMessage('animate|bottom=' + bottom + '');
             
             this.visible = !this.visible;
         },
@@ -296,7 +299,7 @@
             this.storeProperties();
             
             this.$html.addClass('fs');
-            this.$frame.animate({ width : '100%', height : '100%', right : 0 }, { duration : WidgetView.ANIMATION_TIME, queue : false });
+            this.postMessage('animate|width=100%,height=100%,right=0');
             
             this.fullscreen = true;
         },
@@ -304,7 +307,7 @@
         fullscreenOff : function()
         {
             this.$html.removeClass('fs');
-            this.$frame.animate({ width : this.frameWidth, height : this.frameHeight, right : this.frameOffset }, { duration : WidgetView.ANIMATION_TIME, queue : false });
+            this.postMessage('animate|width=' + this.frameWidth + 'px,height=' + this.frameHeight + 'px,right=' + this.frameOffset, 'px');
             
             this.fullscreen = false;
         },
@@ -630,7 +633,7 @@
             
             this.stopTypingBlinkTimer = setTimeout($.proxy(this.stopTypingInfoBlink, this), WidgetView.TYPING_STATUS_TIME);
         },
-
+        
         sendContactMessage : function()
         {
             // Get the input
@@ -826,11 +829,55 @@
         {
             if(!this.fullscreen)
             {
-                this.frameWidth   = this.$frame.width();
-                this.frameHeight  = this.$frame.height();
                 this.headerHeight = this.$header.height();
-                this.frameOffset  = this.$frame.css('right');
+                
+                var _this = this;
+                
+                this.postMessage('get.properties', function(data)
+                {
+                    var p = data.split(',');
+                    
+                    _this.frameWidth  = parseInt(p[0]);
+                    _this.frameHeight = parseInt(p[1]);
+                    _this.frameOffset = parseInt(p[2]);
+                    
+                });
             }
+        },
+        
+        postMessage : function(data, callback)
+        {
+            window.parent.postMessage(data, '*');
+            
+            if(callback)
+            {
+                var $window = $(window);
+                var id      = Math.floor(new Date().getTime() * Math.random());
+                
+                $window.bind('message.' + id, function(evt)
+                {
+                    var parts = evt.originalEvent.data.split(':');
+                    
+                    if(parts[0] === data) callback(parts[1]);
+                    
+                    $window.unbind('message.' + id);
+                });
+            }
+        },
+        
+        initFramesCommunication : function()
+        {
+            var _this = this;
+            
+            this.$window.bind('message', function(evt)
+            {
+                if(!evt.originalEvent.data) return;
+                
+                var parts = evt.originalEvent.data.split(':');
+                
+                if     (parts[0] === 'state.mobile')  _this.$html.addClass   ('mobile-widget');
+                else if(parts[0] === 'state.desktop') _this.$html.removeClass('mobile-widget');
+            });
         }
     },
     {
