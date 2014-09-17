@@ -543,6 +543,7 @@
                 
                 installPath              : '<?php echo $app->path("Install:index") ?>',
                 isOperatorOnlinePath     : '<?php echo $app->path("Operator:isOnline") ?>',
+                isLoggedInPath           : '<?php echo $app->path("Authentication:isGuestLoggedIn") ?>',
                 loginPath                : '<?php echo $app->path("Authentication:loginGuest") ?>',
                 newMessagesPath          : '<?php echo $app->path("Message:operatorGetNew") ?>',
                 lastMessagesPath         : '<?php echo $app->path("Message:operatorGuestGetLast") ?>',
@@ -567,7 +568,7 @@
                 getSettingsPath          : '<?php echo $app->path("Config:getSettings") ?>',
                 updateSettingsPath       : '<?php echo $app->path("Config:updateSettings") ?>',
                 resetSettingsPath        : '<?php echo $app->path("Config:resetSettings") ?>',
-                widgetInitPath           : '<?php echo $app->path("Widget:init") ?>',
+                widgetInitPath           : '<?php echo $app->url("Widget:init") ?>',
                 newChatPath              : '/conversations?auth_token=%s',
                 updateChatPath           : '/conversations/%s?auth_token=%s',
                 

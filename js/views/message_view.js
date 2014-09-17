@@ -9,7 +9,15 @@ window.MessageView = Backbone.View.extend({
     		this.$el.addClass('other')
 
     	var html = '<div class="avatar"><img src="' + this.model.get('person').avatar + '" /></div>';
-    	html += '<div class="message"><p>' + this.model.get('content') + '</p>';
+    	html += '<div class="message"><p>';
+
+        if (this.model.isImage())
+            html += '<img width="140" src="' + this.model.get('content') +'">';
+        
+        else
+            html += this.model.get('content');
+        
+        html += '</p>';
     	html += '<time datetime="2009-11-13T20:00">' + this.model.get('person').name + ' - 51 min</time></div>';
 
     	this.$el.append(html);
