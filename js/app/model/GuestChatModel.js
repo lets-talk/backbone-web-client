@@ -135,28 +135,28 @@
                 success: function(data){
                     
                     _this.trigger('logout:success');
+
+                    // Clear guest data cache
+
+                    $.removeCookie('customer-chat-guest-data', { path: '/' });
+                    
+                    // Clear messages cache
+                    
+                    this.lastMessages = [];
+                    
+                    // Notify about logging out
+                    
+                    this.trigger('logout:init');
+                    
+                    // Check operators again
+                    
+                    this.once('operators:online', this.manageConnection, this);
                     
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    _this.trigger('logout:error');
+                    //_this.trigger('logout:error');
                 }
             });
-
-            // Clear guest data cache
-
-            $.removeCookie('customer-chat-guest-data', { path: '/' });
-            
-            // Clear messages cache
-            
-            this.lastMessages = [];
-            
-            // Notify about logging out
-            
-            this.trigger('logout:init');
-            
-            // Check operators again
-            
-            this.once('operators:online', this.manageConnection, this);
         },
 
         newChat : function(input)
