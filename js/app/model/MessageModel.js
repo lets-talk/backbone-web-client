@@ -79,7 +79,8 @@
             // Calculate how long ago the message was received (in seconds)
             
             var currentTime = Math.floor(new Date().getTime()       / 1000);
-            var messageTime = Math.floor(this.get('time').getTime() / 1000 - (this.options.localMessage ? 0 : config.serverTimeDifference));
+            //var messageTime = Math.floor(this.get('time').getTime() / 1000 - (this.options.localMessage ? 0 : config.serverTimeDifference));
+            var messageTime = Math.floor(this.get('time').getTime() / 1000 - config.serverTimeDifference);
             
             return Math.ceil(currentTime - messageTime);
         },
