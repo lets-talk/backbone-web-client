@@ -10,11 +10,11 @@
     
         defaults : {
             
-            name : 'anonymous',
+            name : 'anonymus',
             mail : '',
-            authToken: 'mAmhZYjuiGvqbDoEsmUq',
+            authToken: '',
             conversationID: '',
-            email: 'guest@letsta.lk',
+            email: '',
             guestID: '38',
             syncTime: ''
         },
@@ -32,6 +32,7 @@
             if($.cookie('customer-chat-guest-data'))
             {
                 var data = JSON.parse($.cookie('customer-chat-guest-data'));
+                console.log(data);
                 this.set({ 
                     name : data.name,
                     mail : data.mail,
@@ -71,7 +72,7 @@
 
             //Checking cookies
 
-            if (_this.checkGuestCache() && $.cookie('customer-chat-messages'))
+            if (_this.checkGuestCache() && _this.get('conversationID').length !== 0)
             {
                 // Notify success
 
@@ -94,23 +95,21 @@
             var _this = this;
             
             input.info = JSON.stringify(config.info);
-            
-            $.post(config.loginPath, input, function(data)
-            {
-                if(data.success)
-                {
-                    // Store the login data
-                    
-                    _this.set({ name : input.name, mail : input.mail, image : input.image });
-                    
-                    // Notify success
-                    
-                    _this.trigger('login:success');
-                }
-                else
-                {
-                    // Notify about need to log in again
-                    
+            input.email = input.mail;
+
+            $.ajax({
+                type: "POST",
+                url: config.basePath + config.loginPath,
+                data: input,
+                success: function(data){
+
+                    _this.set({ name : data.person.name, mail : input.mail, image : input.image, authToken: data.token });
+                    _this.cacheGuestData();
+
+                    _this.newChat(input);
+
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
                     _this.trigger('login:error');
                 }
             });
@@ -171,9 +170,6 @@
 
             $.post(config.basePath + sprintf(config.newChatPath, this.get('authToken')), tempInput, function(data)
             {
-                _this.set({ name : input.name, mail : input.mail, image : input.image, conversationID: data.id });
-                _this.cacheGuestData();
-
                 //Updating user sync time
 
                 if (data.response_server_time)
@@ -337,6 +333,9 @@
                     message.time = new Date();
                     message.datetime = message.time.getTime();
                 
+                console.log('guardando mensaje');
+                console.log(message);
+
             });
 
             // Save the messages

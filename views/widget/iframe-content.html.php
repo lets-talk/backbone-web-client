@@ -77,10 +77,10 @@
                     <a href="#" class="next-avatar customer-chat-content-button customer-chat-content-button-inline"><i class="icon-chevron-right icon-white"></i></a>
                 </div>
                 <div class="customer-chat-content-message-input">
-                    <input id="customer-chat-login-name" type="text" class="customer-chat-content-message-input-field" placeholder="<?php echo $vars['ui']['contactNameLabel'] ?>" />
+                    <input id="customer-chat-login-mail" type="text" class="customer-chat-content-message-input-field" placeholder="<?php echo $vars['ui']['contactMailLabel'] ?>" />
                 </div>
                 <div class="customer-chat-content-message-input">
-                    <input id="customer-chat-login-mail" type="text" class="customer-chat-content-message-input-field" placeholder="<?php echo $vars['ui']['contactMailLabel'] ?>" />
+                    <input id="customer-chat-login-password" type="password" class="customer-chat-content-message-input-field" placeholder="<?php echo $vars['ui']['contactPasswordLabel'] ?>" />
                 </div>
                 <div class="customer-chat-content-row">
                     <a href="#" id="customer-chat-login-start" class="customer-chat-content-button"><?php echo $vars['ui']['startLabel'] ?> <i class="icon-circle-arrow-right icon-white" style="margin: 3px 0 0 3px;"></i></a>
@@ -198,7 +198,7 @@
                 
                 isOperatorOnlinePath   : '<?php echo $app->path("Operator:isOnline") ?>',
                 isLoggedInPath         : '<?php echo $app->path("Authentication:isGuestLoggedIn") ?>',
-                loginPath              : '<?php echo $app->path("Authentication:loginGuest") ?>',
+                loginPath              : '/api/v1/tokens/client',
                 logoutPath             : '<?php echo $app->path("Authentication:logoutGuest") ?>',
                 keepAlivePath          : '<?php echo $app->path("Guest:stayAlive") ?>',
                 getTypingStatusPath    : '<?php echo $app->path("Guest:getTypingStatus") ?>',

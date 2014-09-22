@@ -79,8 +79,8 @@
             this.$contactName         = this.$('#customer-chat-contact-name');
             this.$contactMail         = this.$('#customer-chat-contact-mail');
             this.$contactMessage      = this.$('#customer-chat-contact-message');
-            this.$loginName           = this.$('#customer-chat-login-name');
             this.$loginMail           = this.$('#customer-chat-login-mail');
+            this.$loginPassword       = this.$('#customer-chat-login-password');
             this.$info                = this.$('#customer-chat-info-text');
             this.$toggleSound         = this.$('.customer-chat-toggle-sound');
             this.$toggleScroll        = this.$('.customer-chat-toggle-scroll');
@@ -341,8 +341,8 @@
             
             var input = {
             
-                name  : this.$loginName.val(),
                 mail  : this.$loginMail.val(),
+                password  : this.$loginPassword.val(),
                 image : this.selectAvatar.selected
             };
             
@@ -359,9 +359,9 @@
             
             // Send the login request
             
-            //this.model.login(input);
+            this.model.login(input);
 
-            this.model.newChat(input);
+            //this.model.newChat(input);
         },
         
         loginOnEnter : function(e)
@@ -475,8 +475,8 @@
             
             this.chatBox.clear();
             
-            this.$loginName.val('');
             this.$loginMail.val('');
+            this.$loginPassword.val('');
             
             // Logout
             

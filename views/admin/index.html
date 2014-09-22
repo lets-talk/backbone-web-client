@@ -544,7 +544,7 @@
                 installPath              : '<?php echo $app->path("Install:index") ?>',
                 isOperatorOnlinePath     : '<?php echo $app->path("Operator:isOnline") ?>',
                 isLoggedInPath           : '<?php echo $app->path("Authentication:isGuestLoggedIn") ?>',
-                loginPath                : '<?php echo $app->path("Authentication:loginGuest") ?>',
+                loginPath                : '/api/v1/tokens/client',
                 newMessagesPath          : '<?php echo $app->path("Message:operatorGetNew") ?>',
                 lastMessagesPath         : '<?php echo $app->path("Message:operatorGuestGetLast") ?>',
                 sendMessagePath          : '/conversations/%d/messages?auth_token=%s',
