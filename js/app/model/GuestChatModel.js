@@ -170,6 +170,9 @@
 
             $.post(config.basePath + sprintf(config.newChatPath, this.get('authToken')), tempInput, function(data)
             {
+                _this.set({ conversationID: data.id });
+                _this.cacheGuestData();
+
                 //Updating user sync time
 
                 if (data.response_server_time)
