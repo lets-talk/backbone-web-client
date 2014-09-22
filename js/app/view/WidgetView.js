@@ -248,8 +248,6 @@
         {
             event.stopImmediatePropagation();
             var bottom;
-            
-            console.log('toggle');
 
             if(this.visible) // Hide
             {
@@ -449,24 +447,30 @@
             this.settings.set(settingName, !this.settings.get(settingName));
         },
         
-        endChat : function()
+        endChat : function(event)
         {
+            event.stopImmediatePropagation();
+
             // Show confirmation
             
             this.$endChat.hide();
             this.$endChatConfirmation.show();
         },
         
-        endChatCancel: function()
+        endChatCancel: function(event)
         {
+            event.stopImmediatePropagation();
+
             // Hide confirmation
             
             this.$endChatConfirmation.hide();
             this.$endChat.show();
         },
         
-        endChatConfirm : function()
+        endChatConfirm : function(event)
         {
+            event.stopImmediatePropagation();
+            
             // Hide confirmation
             
             this.$endChatConfirmation.hide();
