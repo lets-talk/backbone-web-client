@@ -32,7 +32,6 @@
             if($.cookie('customer-chat-guest-data'))
             {
                 var data = JSON.parse($.cookie('customer-chat-guest-data'));
-                console.log(data);
                 this.set({ 
                     name : data.name,
                     mail : data.mail,
@@ -49,7 +48,6 @@
             if(this.checkGuestCache() && $.cookie('customer-chat-messages'))
             {
                 this.lastMessages = JSON.parse($.cookie('customer-chat-messages'));
-                console.log(this.lastMessages);
             }
             
 
@@ -335,10 +333,6 @@
                 else
                     message.time = new Date();
                     message.datetime = message.time.getTime();
-                
-                console.log('guardando mensaje');
-                console.log(message);
-
             });
 
             // Save the messages
