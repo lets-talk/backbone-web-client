@@ -17,6 +17,7 @@
             
             // Chat box
             
+            'click .customer-chat-header'                       : 'toggle',
             'click #customer-chat-button-toggle'                : 'toggle',
             'click #customer-chat-button-close'                 : 'close',
             'click #customer-chat-button-settings'              : 'toggleSettings',
@@ -243,10 +244,13 @@
             }
         },
         
-        toggle : function()
+        toggle : function(event)
         {
+            event.stopImmediatePropagation();
             var bottom;
             
+            console.log('toggle');
+
             if(this.visible) // Hide
             {
                 // Store widget's properties
@@ -372,8 +376,9 @@
             }
         },
         
-        toggleSettings : function()
+        toggleSettings : function(event)
         {
+            event.stopImmediatePropagation();
             // Disable if hidden
             
             if(!this.visible)
