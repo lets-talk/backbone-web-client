@@ -222,7 +222,8 @@
                 
                 mobile : <?php echo !empty($vars['mobile']) ? 'true' : 'false' ?>,
                 
-                remoteDomain : '<?php echo $vars['remoteDomain']; ?>'
+                //remoteDomain : '<?php echo $vars['remoteDomain']; ?>'
+                remoteDomain : ''
             };
         </script>
         
