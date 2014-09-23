@@ -25,7 +25,7 @@
         
         soundManager.setup({
         
-            url : config.rootPath + '/swf/',
+            url : config.rootPath + 'swf/',
             
             onready : function()
             {
