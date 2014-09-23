@@ -135,23 +135,24 @@
 
                     // Clear guest data cache
 
-                    $.removeCookie('customer-chat-guest-data', { path: '/' });
+                    $.removeCookie('customer-chat-guest-data');
+                    $.removeCookie('customer-chat-messages');
                     
                     // Clear messages cache
                     
-                    this.lastMessages = [];
+                    _this.lastMessages = [];
                     
                     // Notify about logging out
                     
-                    this.trigger('logout:init');
+                    _this.trigger('login:login');
                     
                     // Check operators again
                     
-                    this.once('operators:online', this.manageConnection, this);
+                    _this.once('operators:online', this.manageConnection, this);
                     
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    //_this.trigger('logout:error');
+                    _this.trigger('logout:error');
                 }
             });
         },
