@@ -179,7 +179,7 @@
         <script src="<?php echo $app->asset('js/lib/json2.js') ?>"></script>
         <script src="<?php echo $app->asset('js/lib/underscore.js') ?>"></script>
         <script src="<?php echo $app->asset('js/lib/backbone.js') ?>"></script>
-        <script src="<?php echo $app->asset('js/lib/soundmanager2-nodebug-jsmin.js') ?>"></script>
+        <!--script src="<?php echo $app->asset('js/lib/soundmanager2-nodebug-jsmin.js') ?>"></script-->
         <script src="<?php echo $app->asset('js/lib/sprintf.min.js') ?>"></script>
         <script src="<?php echo $app->asset('js/lib/moment.js') ?>"></script>
         
