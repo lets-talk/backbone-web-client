@@ -25,8 +25,7 @@ class WidgetController extends Controller
             'uiJson'         => str_replace("'", '&apos;', json_encode($config->data['appSettings'])),
             'defaultAvatars' => json_encode($this->getDefaultAvatars()),
             'info'           => str_replace("'", '&apos;', json_encode($this->get('request')->getUserInfo())),
-            //'remoteDomain'   => $this->get('request')->getVar('domain')
-            'remoteDomain'   => ''
+            'remoteDomain'   => $this->get('request')->getVar('domain')
         ));
     }
     
@@ -40,8 +39,7 @@ class WidgetController extends Controller
             'uiJson'         => str_replace("'", '&apos;', json_encode($config->data['appSettings'])),
             'defaultAvatars' => json_encode($this->getDefaultAvatars()),
             'info'           => str_replace("'", '&apos;', json_encode($this->get('request')->getUserInfo())),
-            //'remoteDomain'   => $this->get('request')->getVar('domain')
-            'remoteDomain'   => ''
+            'remoteDomain'   => $this->get('request')->getVar('domain')
         ));
     }
     
@@ -59,8 +57,7 @@ class WidgetController extends Controller
             'uiJson'         => str_replace("'", '&apos;', json_encode($config->data['appSettings'])),
             'defaultAvatars' => json_encode($this->getDefaultAvatars()),
             'info'           => str_replace("'", '&apos;', json_encode($userInfo)),
-            //'remoteDomain'   => $this->get('request')->getVar('domain')
-            'remoteDomain'   => ''
+            'remoteDomain'   => $this->get('request')->getVar('domain')
         ));
     }
     

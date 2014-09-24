@@ -1,0 +1,6 @@
+window.environmentConfig = {
+	//basePath : 'http://demo.staging.letsta.lk',
+    //basePath : 'http://54.183.100.51',
+    basePath : 'http://localhost:3000',
+    organizationID: '1'
+}

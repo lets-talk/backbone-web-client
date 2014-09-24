@@ -800,8 +800,6 @@
             
             // Add message to the chat box
 
-            console.log('hola');
-
             this.chatBox.addMessage(message);
         },
         

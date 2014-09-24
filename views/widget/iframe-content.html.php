@@ -182,6 +182,8 @@
         <script src="<?php echo $app->asset('js/lib/soundmanager2-nodebug-jsmin.js') ?>"></script>
         <script src="<?php echo $app->asset('js/lib/sprintf.min.js') ?>"></script>
         <script src="<?php echo $app->asset('js/lib/moment.js') ?>"></script>
+
+        <script src="<?php echo $app->asset('js/config/config.js') ?>"></script>
         
         <script type="text/javascript">
             // Basic configuration
@@ -191,8 +193,7 @@
                 serverTimeDifference : (new Date('<?php echo date("Y-m-d H:i:s") ?>'.replace(/-/g,"/")).getTime() / 1000) - (new Date().getTime() / 1000),
                 
                 rootPath : '<?php echo $app->asset("") ?>',
-                basePath : 'http://demo.staging.letsta.lk',
-                //basePath : 'http://54.183.100.51',
+                basePath : window.environmentConfig.basePath,
                 
                 templatesPath : '<?php echo $app->asset("views/widget-templates.html") ?>',
                 
@@ -216,14 +217,13 @@
                 
                 defaultAvatars : JSON.parse('<?php echo $vars["defaultAvatars"] ?>'),
 
-                organizationID: '1',
+                organizationID: window.environmentConfig.organizationID,
                 
                 info : JSON.parse('<?php echo $vars["info"] ?>'),
                 
                 mobile : <?php echo !empty($vars['mobile']) ? 'true' : 'false' ?>,
                 
-                //remoteDomain : '<?php echo $vars['remoteDomain']; ?>'
-                remoteDomain : ''
+                remoteDomain : '<?php echo $vars['remoteDomain']; ?>'
             };
         </script>
         
