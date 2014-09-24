@@ -320,11 +320,11 @@
         {
             // Get first and last message IDs
             
-            /*var data = {
+            var data = {
                 
                 firstId : data[0].id,
                 lastId  : data[data.length - 1].id
-            };*/
+            };
             
             // Send the confirmation request
             
