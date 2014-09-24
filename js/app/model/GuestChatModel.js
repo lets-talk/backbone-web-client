@@ -494,7 +494,7 @@
                 
                 // Keeping connection alive
                 
-                _this.keepAlive();
+                //_this.keepAlive();
                 
                 // Checking typing status
                 
@@ -502,7 +502,7 @@
                 
                 // Checking operator's availability
                 
-                _this.checkOperators();
+                //_this.checkOperators();
             
             }, GuestChatModel.POLLING_INTERVAL);
         },
