@@ -5,7 +5,7 @@ $config = array(
     // Database settings
     
     'dbHost'          => 'localhost',
-    'dbPort'          => 3306,
+    'dbPort'          => 8889,
     'dbUser'          => 'root',
     'dbPassword'      => 'root',
     'dbName'          => 'lt_widget',

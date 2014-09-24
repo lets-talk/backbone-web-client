@@ -22,6 +22,8 @@
         operatorsCache : {},
         
         lastMessages : [],
+
+        isGettingMessages: false,
         
         lastTypingUpdate : 0,
         
@@ -265,39 +267,51 @@
             
             var _this = this;
 
-            if (_this.get('conversationID').length === 0)
+            if (_this.get('conversationID').length === 0 || _this.isGettingMessages)
                 return;
+
+            _this.isGettingMessages = true;
             
-            $.get(config.basePath + sprintf(config.newMessagesPath, _this.get('authToken'), _this.get('syncTime'), _this.get('guestID'), config.organizationID), function(data)
-            {
-                // Check if there are any new messages
-                if(data.length > 0)
-                {
-                    _.each(data, function(conversation)
+            $.ajax({
+                type: "GET",
+                url: config.basePath + sprintf(config.newMessagesPath, _this.get('authToken'), _this.get('syncTime'), _this.get('guestID'), config.organizationID),
+                success: function(data){
+                    
+                    _this.isGettingMessages = false;
+
+                    // Check if there are any new messages
+                    if(data.length > 0)
                     {
-                        if(conversation.id == _this.get('conversationID') && conversation.new_messages.length > 0)
+                        _.each(data, function(conversation)
                         {
-                            //conversation.new_messages.authorType = 'operator';
+                            if(conversation.id == _this.get('conversationID') && conversation.new_messages.length > 0)
+                            {
+                                //conversation.new_messages.authorType = 'operator';
 
-                            var realMessages = $.grep(conversation.new_messages, function(message, index){
-                                return message.person && (message.person.email != _this.get('email'))
-                            });
+                                var realMessages = $.grep(conversation.new_messages, function(message, index){
+                                    return message.person && (message.person.email != _this.get('email'))
+                                });
 
-                            if (realMessages.length > 0)
-                                _this.trigger('messages:new', realMessages);    
-                        }
-                    });
+                                if (realMessages.length > 0)
+                                    _this.trigger('messages:new', realMessages);    
+                            }
+                        });
 
-                    // Collect operator(s) info
+                        // Collect operator(s) info
 
-                    /*_this.loadOperatorsData(data, function()
-                    {
-                        // Notify about new messages
-                        
-                        data.authorType = 'operator';
-                        
-                        _this.trigger('messages:new', data);
-                    });*/
+                        /*_this.loadOperatorsData(data, function()
+                        {
+                            // Notify about new messages
+                            
+                            data.authorType = 'operator';
+                            
+                            _this.trigger('messages:new', data);
+                        });*/
+                    }
+                    
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    _this.isGettingMessages = false;
                 }
             });
         },
