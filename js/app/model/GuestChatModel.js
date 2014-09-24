@@ -37,6 +37,7 @@
                 this.set({ 
                     name : data.name,
                     mail : data.mail,
+                    email : data.mail,
                     authToken : data.authToken,
                     conversationID: data.conversationID,
                     syncTime : data.syncTime
@@ -191,6 +192,10 @@
             // Check if there's any operator on-line
             
             var _this = this;
+
+            _this.trigger('operators:online');
+
+            /* USELESS CODE NOW 
             
             $.get(config.isOperatorOnlinePath, function(data)
             {
@@ -206,7 +211,7 @@
                     
                     _this.trigger('operators:online');
                 }
-            });
+            }); */
         },
         
         keepAlive : function()
@@ -320,11 +325,11 @@
         {
             // Get first and last message IDs
             
-            var data = {
+            /*var data = {
                 
                 firstId : data[0].id,
                 lastId  : data[data.length - 1].id
-            };
+            };*/
             
             // Send the confirmation request
             
