@@ -211,7 +211,7 @@
                             author     : author,
                             content    : msgData.content,
                             time       : new Date(msgData.datetime),
-                            avatar     : msgData.person ? msgData.person.avatar : ''
+                            avatar     : msgData.person ? msgData.person.avatar : msgData.avatar
                         });
                         
                         // Add message to the chat box
@@ -607,6 +607,7 @@
                 authorType : 'guest',
                 content    : body,
                 time       : new Date(),
+                avatar     : this.model.get('avatar'),
                 
                 from_user_info : { image : this.model.get('image') }
             },

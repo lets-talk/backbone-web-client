@@ -16,7 +16,8 @@
             conversationID: '',
             email: '',
             guestID: '',
-            syncTime: ''
+            syncTime: '',
+            avatar: ''
         },
         
         operatorsCache : {},
@@ -41,7 +42,8 @@
                     guestID : data.guestID,
                     authToken : data.authToken,
                     conversationID: data.conversationID,
-                    syncTime : data.syncTime
+                    syncTime : data.syncTime,
+                    avatar : data.avatar
                 });
             }
             else
@@ -105,7 +107,16 @@
                 data: input,
                 success: function(data){
 
-                    _this.set({ name : data.person.name, mail : input.mail, email : input.mail, image : input.image, authToken: data.token, guestID: data.person.id });
+                    _this.set({ 
+                        name : data.person.name,
+                        mail : input.mail,
+                        email : input.mail,
+                        image : input.image,
+                        authToken: data.token,
+                        guestID: data.person.id,
+                        avatar: data.person.avatar
+                    });
+
                     _this.cacheGuestData();
 
                     _this.newChat(input);
@@ -535,7 +546,8 @@
                 guestID: _this.get('guestID'),
                 authToken: _this.get('authToken'),
                 conversationID: _this.get('conversationID'),
-                syncTime: _this.get('syncTime')
+                syncTime: _this.get('syncTime'),
+                avatar: _this.get('avatar')
             }
 
             $.cookie('customer-chat-guest-data', JSON.stringify(data), { expires : date });

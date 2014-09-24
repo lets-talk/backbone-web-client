@@ -20,7 +20,7 @@
         initialize : function(attributes, options)
         {
             this.options = options || {};
-            
+
             // Initialize fields if stored as server-side data
 
             if(attributes)
@@ -62,12 +62,17 @@
                     this.set('toAuthorMail', toUser.mail);
                 }
 
+                if(typeof attributes.avatar === 'string')
+                {
+                    this.set('avatar', attributes.avatar);
+                }
+
                 if(typeof attributes.person === 'object')
                 {
                     this.set('author', attributes.person.name)
 
                     if(this.get('avatar').length === 0)
-                        this.set('avatar', attributes.person.avatar)
+                        this.set('avatar', attributes.person.avatar);
                 }
                 
                 // ...
