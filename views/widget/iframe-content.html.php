@@ -190,8 +190,6 @@
             
             window.chatConfig = {
             
-                serverTimeDifference : (new Date('<?php echo date("Y-m-d H:i:s") ?>'.replace(/-/g,"/")).getTime() / 1000) - (new Date().getTime() / 1000),
-                
                 rootPath : '<?php echo $app->asset("") ?>',
                 basePath : window.environmentConfig.basePath,
                 
