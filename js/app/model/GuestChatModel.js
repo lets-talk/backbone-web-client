@@ -289,7 +289,7 @@
                                 //conversation.new_messages.authorType = 'operator';
 
                                 var realMessages = $.grep(conversation.new_messages, function(message, index){
-                                    return message.person && (message.person.email != _this.get('email'))
+                                    return message.person && (message.person.email != _this.get('mail'))
                                 });
 
                                 if (realMessages.length > 0)
@@ -522,6 +522,7 @@
             var data = {
                 name: _this.get('name'),
                 mail: _this.get('mail'),
+                email: _this.get('mail'),
                 authToken: _this.get('authToken'),
                 conversationID: _this.get('conversationID'),
                 syncTime: _this.get('syncTime')

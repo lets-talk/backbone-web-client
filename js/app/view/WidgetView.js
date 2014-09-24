@@ -157,7 +157,7 @@
             
             // Start up
             
-            this.model.checkOperators();
+            //this.model.checkOperators();
             
             // Store widget's properties
             
@@ -774,7 +774,7 @@
             // Initialize the chat again
             
             this.showLogin();
-            this.model.checkOperators();
+            //this.model.checkOperators();
         },
         
         onLogoutError : function()
@@ -782,7 +782,7 @@
             // Initialize the chat again
             
             this.showLogin();
-            this.model.checkOperators();
+            //this.model.checkOperators();
         },
         
         showWelcomeMessage : function()
