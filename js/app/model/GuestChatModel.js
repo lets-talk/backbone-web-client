@@ -15,7 +15,7 @@
             authToken: '',
             conversationID: '',
             email: '',
-            guestID: '38',
+            guestID: '',
             syncTime: ''
         },
         
@@ -38,6 +38,7 @@
                     name : data.name,
                     mail : data.mail,
                     email : data.mail,
+                    guestID : data.guestID,
                     authToken : data.authToken,
                     conversationID: data.conversationID,
                     syncTime : data.syncTime
@@ -104,7 +105,7 @@
                 data: input,
                 success: function(data){
 
-                    _this.set({ name : data.person.name, mail : input.mail, image : input.image, authToken: data.token });
+                    _this.set({ name : data.person.name, mail : input.mail, email : input.mail, image : input.image, authToken: data.token, guestID: data.person.id });
                     _this.cacheGuestData();
 
                     _this.newChat(input);
@@ -162,6 +163,9 @@
 
         newChat : function(input)
         {
+            if(!this.get('guestID') || this.get('guestID') == undefined)
+                return;
+
             var _this = this;
 
             var tempInput = {
@@ -272,7 +276,7 @@
             
             var _this = this;
 
-            if (_this.get('conversationID').length === 0 || _this.isGettingMessages)
+            if (_this.get('conversationID').length === 0 || _this.isGettingMessages || _this.get('guestID') == undefined || !_this.get('guestID'))
                 return;
 
             _this.isGettingMessages = true;
@@ -528,6 +532,7 @@
                 name: _this.get('name'),
                 mail: _this.get('mail'),
                 email: _this.get('mail'),
+                guestID: _this.get('guestID'),
                 authToken: _this.get('authToken'),
                 conversationID: _this.get('conversationID'),
                 syncTime: _this.get('syncTime')
