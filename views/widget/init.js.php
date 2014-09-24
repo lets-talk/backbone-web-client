@@ -201,6 +201,11 @@
         // -----
         
         document.body.appendChild(iframe);
+
+        var meta = document.createElement('meta');
+        meta.setAttribute('http-equiv', 'pragma');
+        meta.setAttribute('content', 'private');
+        document.getElementsByTagName('head').item(0).appendChild(meta);
         
         // -----
         
