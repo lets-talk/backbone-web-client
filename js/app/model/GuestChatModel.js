@@ -530,9 +530,9 @@
             }, GuestChatModel.POLLING_INTERVAL);
         },
 
-        resetMessagesCache()
+        resetMessagesCache: function()
         {
-            _this.lastMessages = [];
+            this.lastMessages = [];
             $.removeCookie('customer-chat-messages');
         },
 
