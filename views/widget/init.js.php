@@ -142,7 +142,6 @@
             
             addListener(window, 'message', function(evt)
             {
-                console.log(evt);
                 var parts = evt.data.split('|');
                 var type  = parts[0];
                 iframe.style.display = 'block';
