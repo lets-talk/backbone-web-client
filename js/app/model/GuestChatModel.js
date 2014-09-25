@@ -153,7 +153,7 @@
                     
                     // Clear messages cache
                     
-                    _this.lastMessages = [];
+                    _this.resetMessagesCache();
 
                     _this.set({conversationID: ''});
                     
@@ -189,6 +189,8 @@
             {
                 _this.set({ conversationID: data.id });
                 _this.cacheGuestData();
+
+                _this.resetMessagesCache();
 
                 //Updating user sync time
 
@@ -526,6 +528,12 @@
                 //_this.checkOperators();
             
             }, GuestChatModel.POLLING_INTERVAL);
+        },
+
+        resetMessagesCache()
+        {
+            _this.lastMessages = [];
+            $.removeCookie('customer-chat-messages');
         },
 
         checkGuestCache: function()
