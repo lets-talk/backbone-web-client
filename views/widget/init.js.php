@@ -101,7 +101,7 @@
         iframe.marginHeight     = 0;
         iframe.frameBorder      = 0;
         iframe.outline          = 'none';
-        iframe.style.display    = 'none';
+        iframe.style.display    = 'block';
         iframe.style.background = 'transparent';
         iframe.style.border     = 'none';
         iframe.style.outline    = 'none';
@@ -145,6 +145,7 @@
                 console.log(evt);
                 var parts = evt.data.split('|');
                 var type  = parts[0];
+                iframe.style.display = 'block';
                 
                 switch(type)
                 {
@@ -194,7 +195,6 @@
                     
                     case 'hide':
                         //iframe.style.display = 'none';
-                        iframe.style.display = 'block';
                     break;
                 }
             });
