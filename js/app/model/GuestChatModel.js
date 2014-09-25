@@ -99,6 +99,8 @@
             
             input.info = JSON.stringify(config.info);
             input.email = input.mail;
+            input.organization_id = window.environmentConfig.organizationID;
+            input.type = 'client';
 
             $.ajax({
                 type: "POST",

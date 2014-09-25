@@ -10,27 +10,27 @@
     
         mailExp : new RegExp('^[-+\\.0-9=a-z_]+@([-0-9a-z]+\\.)+([0-9a-z]){2,}$', 'i'),
         
+        nameValid: false,
         mailValid : false,
-        passwordValid : false,
         
         initialize : function()
         {
             // Cache view elements
             
+            this.$name     = this.$('#customer-chat-login-name');
             this.$mail     = this.$('#customer-chat-login-mail');
-            this.$password = this.$('#customer-chat-login-password');
             
+            this.$name.on('input change keydown blur', $.proxy(this.validateName, this));
             this.$mail.on('input change keydown blur', $.proxy(this.validateMail, this));
-            this.$password.on('input change keydown blur', $.proxy(this.validatePassword, this));
         },
         
         reset : function()
         {
             this.$mail.val('');
-            this.$password.val('');
+            this.$name.val('');
             
+            this.$name.removeClass('customer-chat-input-error');
             this.$mail.removeClass('customer-chat-input-error');
-            this.$password.removeClass('customer-chat-input-error');
         },
         
         validateMail : function()
@@ -49,28 +49,28 @@
             }
         },
 
-        validatePassword : function()
+        validateName : function()
         {
-            if(this.$password.val().length == 0)
+            if(this.$name.val().length == 0)
             {
-                this.$password.addClass('customer-chat-input-error');
+                this.$name.addClass('customer-chat-input-error');
                 
-                this.passwordValid = false;
+                this.nameValid = false;
             }
             else
             {
-                this.$password.removeClass('customer-chat-input-error');
+                this.$name.removeClass('customer-chat-input-error');
                 
-                this.passwordValid = true;
+                this.nameValid = true;
             }
         },
         
         isValid : function()
         {
+            this.validateName();
             this.validateMail();
-            this.validatePassword();
             
-            return this.mailValid && this.passwordValid;
+            return this.nameValid && this.mailValid;
         }
     });
 
