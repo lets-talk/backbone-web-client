@@ -55,7 +55,6 @@
             {
                 this.lastMessages = JSON.parse($.cookie('customer-chat-messages'));
             }
-            
 
             this.once('operators:online', this.manageConnection, this);
             
@@ -76,7 +75,7 @@
 
             //Checking cookies
 
-            if (_this.checkGuestCache() && _this.get('conversationID').length !== 0)
+            if (_this.checkGuestCache() && typeof this.get('conversationID') === 'number')
             {
                 // Notify success
 
@@ -119,8 +118,7 @@
 
                     _this.cacheGuestData();
 
-                    _this.newChat(input);
-
+                    _this.trigger('login:success');
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     _this.trigger('login:error');
@@ -156,6 +154,8 @@
                     // Clear messages cache
                     
                     _this.lastMessages = [];
+
+                    _this.set({conversationID: ''});
                     
                     // Notify about logging out
                     
@@ -172,7 +172,7 @@
             });
         },
 
-        newChat : function(input)
+        newChat : function(message)
         {
             if(!this.get('guestID') || this.get('guestID') == undefined)
                 return;
@@ -180,7 +180,7 @@
             var _this = this;
 
             var tempInput = {
-                issue: input.mail,
+                issue: this.get('mail'),
                 organization_id: config.organizationID,
                 client_id: this.get('guestID')
             };
@@ -197,8 +197,9 @@
                     _this.set({ syncTime: data.response_server_time })
                     _this.cacheGuestData();
                 }
+
+                _this.sendMessage(message);
                 
-                _this.trigger('login:success');
             });
         },
         
@@ -287,7 +288,7 @@
             
             var _this = this;
 
-            if (_this.get('conversationID').length === 0 || _this.isGettingMessages || _this.get('guestID') == undefined || !_this.get('guestID'))
+            if (typeof this.get('conversationID') !== 'number' || _this.isGettingMessages || _this.get('guestID') == undefined || !_this.get('guestID'))
                 return;
 
             _this.isGettingMessages = true;
@@ -457,7 +458,7 @@
         
         sendMessage : function(message, callback)
         {
-            if (this.get('conversationID') == '')
+            if (this.get('conversationID').length === 0)
                 return;
 
             // Prepare data

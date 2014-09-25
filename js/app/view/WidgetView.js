@@ -362,8 +362,6 @@
             // Send the login request
             
             this.model.login(input);
-
-            //this.model.newChat(input);
         },
         
         loginOnEnter : function(e)
@@ -616,8 +614,18 @@
             });
             
             // Send the message
+
+            if(typeof this.model.get('conversationID') !== 'number')
+            {
+                console.log('aca');
+                this.model.newChat(message);
+            }
+            else
+            {
+                console.log('aca2');
+                this.model.sendMessage(message);
+            }
             
-            this.model.sendMessage(message);
             
             // Add message to the chat box
             
