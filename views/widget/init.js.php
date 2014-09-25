@@ -193,7 +193,8 @@
                     break;
                     
                     case 'hide':
-                        iframe.style.display = 'none';
+                        //iframe.style.display = 'none';
+                        iframe.style.display = 'block';
                     break;
                 }
             });
