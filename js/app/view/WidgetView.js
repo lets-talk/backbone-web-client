@@ -507,7 +507,7 @@
             this.chatBox.clear();
             
             this.$loginMail.val('');
-            this.$loginPassword.val('');
+            this.$loginName.val('');
             
             // Logout
             

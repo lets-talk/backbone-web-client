@@ -109,7 +109,7 @@
                 success: function(data){
 
                     _this.saveDataAfterLogin(data);
-                    
+
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     if (XMLHttpRequest.status == 409)
@@ -556,7 +556,7 @@
 
         saveDataAfterLogin: function(data)
         {
-            _this.set({ 
+            this.set({ 
                 name : data.person.name,
                 mail : data.person.email,
                 email : data.person.email,
@@ -565,9 +565,9 @@
                 avatar: data.person.avatar
             });
 
-            _this.cacheGuestData();
+            this.cacheGuestData();
 
-            _this.trigger('login:success');
+            this.trigger('login:success');
         },
 
         checkGuestCache: function()
