@@ -104,15 +104,51 @@
 
             $.ajax({
                 type: "POST",
-                url: config.basePath + config.loginPath,
+                url: config.basePath + config.guestLoginPath,
                 data: input,
                 success: function(data){
 
-                    _this.set({ 
+                    /*_this.set({ 
                         name : data.person.name,
                         mail : input.mail,
                         email : input.mail,
                         image : input.image,
+                        authToken: data.token,
+                        guestID: data.person.id,
+                        avatar: data.person.avatar
+                    });
+
+                    _this.cacheGuestData();
+
+                    _this.trigger('login:success');*/
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    if (XMLHttpRequest.status == 409)
+                    {
+                        _this.set({ email: input.mail, mail: input.mail });
+                        _this.trigger('login:password-validation');
+                    }
+
+                    else
+                        _this.trigger('login:error');
+                    
+                }
+            });
+        },
+
+        passwordValidation: function(password)
+        {
+            var _this = this;
+
+            $.ajax({
+                type: "POST", 
+                url: config.basePath + config.loginPath,
+                data: {email: this.get('mail'), password: password},
+                success: function(data){
+                    _this.set({ 
+                        name : data.person.name,
+                        mail : data.person.email,
+                        email : data.person.email,
                         authToken: data.token,
                         guestID: data.person.id,
                         avatar: data.person.avatar
@@ -125,7 +161,7 @@
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     _this.trigger('login:error');
                 }
-            });
+            })
         },
         
         logout : function()

@@ -17,7 +17,8 @@
     border-top: none;
 }
 
-.login-form .customer-chat-content
+.login-form .customer-chat-content,
+.password-validation-form .customer-chat-content
 {
     text-align: center;
 }
@@ -61,7 +62,9 @@
     border-radius: 25px;
 }
 
-.customer-chat-widget.contact-form .customer-chat-content-message-input-field, .customer-chat-widget.login-form .customer-chat-content-message-input-field
+.customer-chat-widget.contact-form .customer-chat-content-message-input-field, 
+.customer-chat-widget.login-form .customer-chat-content-message-input-field,
+.customer-chat-widget.password-validation-form .customer-chat-content-message-input-field
 {
     padding-left: 14px;
 }

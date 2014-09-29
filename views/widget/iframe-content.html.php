@@ -87,6 +87,19 @@
                 </div>
             </div>
 
+            <div id="customer-chat-content-password-validation-form" class="customer-chat-content">
+                <div class="customer-chat-content-info">
+                    Antes de ingresar a tu cuenta, por favor ingresa tu contraseña.
+                </div>
+
+                <div class="customer-chat-content-message-input">
+                    <input id="customer-chat-password-validation-password" type="password" class="customer-chat-content-message-input-field" placeholder="Tu contraseña"/>
+                </div>
+                <div class="customer-chat-content-row">
+                    <a href="#" id="customer-chat-password-validation-start" class="customer-chat-content-button"><?php echo $vars['ui']['startLabel'] ?> <i class="icon-circle-arrow-right icon-white" style="margin: 3px 0 0 3px;"></i></a>
+                </div>
+            </div>
+
             <div id="customer-chat-content-chat-box" class="customer-chat-content chat-box">
                 <div class="customer-chat-content-messages">
                     <div class="customer-chat-content-messages-wrapper"></div>
@@ -197,7 +210,8 @@
                 
                 isOperatorOnlinePath   : '<?php echo $app->path("Operator:isOnline") ?>',
                 isLoggedInPath         : '<?php echo $app->path("Authentication:isGuestLoggedIn") ?>',
-                loginPath              : '/api/v1/guest_tokens/client',
+                guestLoginPath         : '/api/v1/guest_tokens/client',
+                loginPath              : '/api/v1/tokens/client',
                 logoutPath             : '<?php echo $app->path("Authentication:logoutGuest") ?>',
                 keepAlivePath          : '<?php echo $app->path("Guest:stayAlive") ?>',
                 getTypingStatusPath    : '<?php echo $app->path("Guest:getTypingStatus") ?>',
@@ -234,6 +248,7 @@
         <script src="<?php echo $app->asset('js/app/model/GuestChatModel.js') ?>"></script>
         
         <script src="<?php echo $app->asset('js/app/view/LoginFormView.js') ?>"></script>
+        <script src="<?php echo $app->asset('js/app/view/PasswordValidationFormView.js') ?>"></script>
         <script src="<?php echo $app->asset('js/app/view/ContactFormView.js') ?>"></script>
         <script src="<?php echo $app->asset('js/app/view/MessageView.js') ?>"></script>
         <script src="<?php echo $app->asset('js/app/view/ChatBoxView.js') ?>"></script>

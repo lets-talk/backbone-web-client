@@ -46,7 +46,7 @@
     margin-left: 15px;
 }
 
-.login-form .customer-chat-content-row
+.login-form .customer-chat-content-row, .password-validation-form .customer-chat-content-row
 {
     padding: 5px 20px;
 }

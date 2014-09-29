@@ -2,29 +2,33 @@
 
 .customer-chat-login,
 .customer-chat-login .customer-chat-header,
-#customer-chat-content-login-form
+#customer-chat-content-login-form,
+#customer-chat-content-password-validation-form
 {
     min-width: 0;
     min-height: 0;
     width: 371px;
 }
 
-#customer-chat-content-login-form
+#customer-chat-content-login-form,
+#customer-chat-content-password-validation-form
 {
     min-height: 353px;
 }
 
-.login-form
+.login-form, .password-validation-form
 {
     height: auto;
 }
 
-#customer-chat-content-login-form.customer-chat-content
+#customer-chat-content-login-form.customer-chat-content,
+#customer-chat-content-password-validation-form.customer-chat-content
 {
     top: 0;
 }
 
-#customer-chat-content-login-form .customer-chat-content-row
+#customer-chat-content-login-form .customer-chat-content-row,
+#customer-chat-content-password-validation-form .customer-chat-content-row
 {
     bottom: 36px;
 }

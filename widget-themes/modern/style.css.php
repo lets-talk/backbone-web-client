@@ -9,7 +9,8 @@
     border-top: none;
 }
 
-.login-form .customer-chat-content
+.login-form .customer-chat-content,
+.password-validation-form .customer-chat-content
 {
     text-align: center;
 }

@@ -13,6 +13,7 @@
             // Login form
             
             'click #customer-chat-login-start'                : 'login',
+            'click #customer-chat-password-validation-start'  : 'passwordValidation',
             'keydown #customer-chat-content-login-form input' : 'loginOnEnter',
             
             // Chat box
@@ -59,37 +60,39 @@
             
             // Create sub views
             
-            this.loginForm    = new app.LoginFormView         ({ el : this.$('#customer-chat-content-login-form')   });
-            this.chatBox      = new app.ChatBoxView           ({ el : this.$('.customer-chat-content-messages')     });
-            this.contactForm  = new app.ContactFormView       ({ el : this.$('#customer-chat-content-contact-form') });
-            this.selectAvatar = new app.SelectAvatarInlineView({ el : this.$('#customer-chat-select-avatar'), model : config.defaultAvatars });
+            this.loginForm              = new app.LoginFormView         ({ el : this.$('#customer-chat-content-login-form')   });
+            this.passwordValidationForm = new app.PasswordValidationFormView({ el : this.$('#customer-chat-content-password-validation-form')   });
+            this.chatBox                = new app.ChatBoxView           ({ el : this.$('.customer-chat-content-messages')     });
+            this.contactForm            = new app.ContactFormView       ({ el : this.$('#customer-chat-content-contact-form') });
+            this.selectAvatar           = new app.SelectAvatarInlineView({ el : this.$('#customer-chat-select-avatar'), model : config.defaultAvatars });
             
             // Cache view components
             
-            this.$window              = $(window);
-            this.$html                = $('html');
-            this.$header              = this.$('.customer-chat-header');
-            this.$title               = this.$('.customer-chat-header-title');
-            this.$mobileTitle         = $('#mobile-widget i');
-            this.$toggleBtn           = this.$('#customer-chat-button-toggle');
-            this.$settingsBtn         = this.$('#customer-chat-button-settings');
-            this.$settings            = this.$('.customer-chat-header-menu');
-            this.$typingInfo          = this.$('.typing-indicator');
-            this.$emoticons           = this.$('.customer-chat-emots-menu');
-            this.$input               = this.$('#customer-chat-message-input');
-            this.$contactName         = this.$('#customer-chat-contact-name');
-            this.$contactMail         = this.$('#customer-chat-contact-mail');
-            this.$contactMessage      = this.$('#customer-chat-contact-message');
-            this.$loginName           = this.$('#customer-chat-login-name');
-            this.$loginMail           = this.$('#customer-chat-login-mail');
-            this.$info                = this.$('#customer-chat-info-text');
-            this.$toggleSound         = this.$('.customer-chat-toggle-sound');
-            this.$toggleScroll        = this.$('.customer-chat-toggle-scroll');
-            this.$toggleEmots         = this.$('.customer-chat-toggle-emots');
-            this.$toggleShow          = this.$('.customer-chat-toggle-show');
-            this.$endChat             = this.$('#customer-chat-action-end-chat');
-            this.$endChatConfirmation = this.$('#customer-chat-action-end-chat-confirmation');
-            this.$endChatConfirm      = this.$('#customer-chat-action-end-chat-confirm');
+            this.$window                        = $(window);
+            this.$html                          = $('html');
+            this.$header                        = this.$('.customer-chat-header');
+            this.$title                         = this.$('.customer-chat-header-title');
+            this.$mobileTitle                   = $('#mobile-widget i');
+            this.$toggleBtn                     = this.$('#customer-chat-button-toggle');
+            this.$settingsBtn                   = this.$('#customer-chat-button-settings');
+            this.$settings                      = this.$('.customer-chat-header-menu');
+            this.$typingInfo                    = this.$('.typing-indicator');
+            this.$emoticons                     = this.$('.customer-chat-emots-menu');
+            this.$input                         = this.$('#customer-chat-message-input');
+            this.$contactName                   = this.$('#customer-chat-contact-name');
+            this.$contactMail                   = this.$('#customer-chat-contact-mail');
+            this.$contactMessage                = this.$('#customer-chat-contact-message');
+            this.$loginName                     = this.$('#customer-chat-login-name');
+            this.$loginMail                     = this.$('#customer-chat-login-mail');
+            this.$passwordValidationPassword    = this.$('#customer-chat-password-validation-password');
+            this.$info                          = this.$('#customer-chat-info-text');
+            this.$toggleSound                   = this.$('.customer-chat-toggle-sound');
+            this.$toggleScroll                  = this.$('.customer-chat-toggle-scroll');
+            this.$toggleEmots                   = this.$('.customer-chat-toggle-emots');
+            this.$toggleShow                    = this.$('.customer-chat-toggle-show');
+            this.$endChat                       = this.$('#customer-chat-action-end-chat');
+            this.$endChatConfirmation           = this.$('#customer-chat-action-end-chat-confirmation');
+            this.$endChatConfirm                = this.$('#customer-chat-action-end-chat-confirm');
             
             // Set the initial state
             
@@ -129,12 +132,13 @@
             
             // Handle logging in / out
             
-            this.model.on('login:success',  this.showChat,        this);
-            this.model.on('login:login',    this.showLogin,       this);
-            this.model.on('login:error',    this.showLoginError,  this);
-            this.model.on('logout:init',    this.onLogout,        this);
-            this.model.on('logout:success', this.onLogoutSuccess, this);
-            this.model.on('logout:error',   this.onLogoutError,   this);
+            this.model.on('login:success',              this.showChat,              this);
+            this.model.on('login:login',                this.showLogin,             this);
+            this.model.on('login:password-validation',  this.showPasswordValidation, this);
+            this.model.on('login:error',                this.showLoginError,        this);
+            this.model.on('logout:init',                this.onLogout,              this);
+            this.model.on('logout:success',             this.onLogoutSuccess,       this);
+            this.model.on('logout:error',               this.onLogoutError,         this);
             
             // Handle last & new messages
             
@@ -183,7 +187,7 @@
             
             // Show appropriate view
             
-            this.$el.removeClass('login-form chat-box contact-form loading-screen info-screen');
+            this.$el.removeClass('login-form chat-box contact-form loading-screen info-screen password-validation-form');
             
             switch(state)
             {
@@ -227,6 +231,14 @@
                     this.$title.html(config.ui.chatHeader);
                     this.fullscreenOff();
                     
+                    this.prevState = state;
+                break;
+
+                case 'password-validation':
+                    this.$el.addClass('password-validation-form');
+                    this.$title.html(config.ui.chatHeader);
+                    this.fullscreenOff();
+
                     this.prevState = state;
                 break;
                 
@@ -362,6 +374,18 @@
             // Send the login request
             
             this.model.login(input);
+        },
+
+        passwordValidation : function()
+        {
+            if(!this.passwordValidationForm.isValid())
+            {
+                return;
+            }
+
+            this.showLoading();
+
+            this.model.passwordValidation(this.$passwordValidationPassword.val());
         },
         
         loginOnEnter : function(e)
@@ -764,6 +788,11 @@
             // Handle welcome message (only after initial login)
             
             this.model.once('login:success', this.showWelcomeMessage, this);
+        },
+
+        showPasswordValidation : function()
+        {
+            this.setState('password-validation');
         },
         
         showLoginError : function()
