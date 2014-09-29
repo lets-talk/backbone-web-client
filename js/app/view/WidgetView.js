@@ -641,12 +641,10 @@
 
             if(typeof this.model.get('conversationID') !== 'number')
             {
-                console.log('aca');
                 this.model.newChat(message);
             }
             else
             {
-                console.log('aca2');
                 this.model.sendMessage(message);
             }
             

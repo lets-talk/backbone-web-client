@@ -108,19 +108,8 @@
                 data: input,
                 success: function(data){
 
-                    /*_this.set({ 
-                        name : data.person.name,
-                        mail : input.mail,
-                        email : input.mail,
-                        image : input.image,
-                        authToken: data.token,
-                        guestID: data.person.id,
-                        avatar: data.person.avatar
-                    });
-
-                    _this.cacheGuestData();
-
-                    _this.trigger('login:success');*/
+                    _this.saveDataAfterLogin(data);
+                    
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     if (XMLHttpRequest.status == 409)
@@ -145,18 +134,9 @@
                 url: config.basePath + config.loginPath,
                 data: {email: this.get('mail'), password: password},
                 success: function(data){
-                    _this.set({ 
-                        name : data.person.name,
-                        mail : data.person.email,
-                        email : data.person.email,
-                        authToken: data.token,
-                        guestID: data.person.id,
-                        avatar: data.person.avatar
-                    });
+                    
+                    _this.saveDataAfterLogin(data);
 
-                    _this.cacheGuestData();
-
-                    _this.trigger('login:success');
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     _this.trigger('login:error');
@@ -572,6 +552,22 @@
         {
             this.lastMessages = [];
             $.removeCookie('customer-chat-messages');
+        },
+
+        saveDataAfterLogin: function(data)
+        {
+            _this.set({ 
+                name : data.person.name,
+                mail : data.person.email,
+                email : data.person.email,
+                authToken: data.token,
+                guestID: data.person.id,
+                avatar: data.person.avatar
+            });
+
+            _this.cacheGuestData();
+
+            _this.trigger('login:success');
         },
 
         checkGuestCache: function()
