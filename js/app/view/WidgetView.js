@@ -132,13 +132,14 @@
             
             // Handle logging in / out
             
-            this.model.on('login:success',              this.showChat,              this);
-            this.model.on('login:login',                this.showLogin,             this);
-            this.model.on('login:password-validation',  this.showPasswordValidation, this);
-            this.model.on('login:error',                this.showLoginError,        this);
-            this.model.on('logout:init',                this.onLogout,              this);
-            this.model.on('logout:success',             this.onLogoutSuccess,       this);
-            this.model.on('logout:error',               this.onLogoutError,         this);
+            this.model.on('login:success',              this.showChat,                  this);
+            this.model.on('login:welcome',              this.showWelcome,               this);
+            this.model.on('login:login',                this.showLogin,                 this);
+            this.model.on('login:password-validation',  this.showPasswordValidation,    this);
+            this.model.on('login:error',                this.showLoginError,            this);
+            this.model.on('logout:init',                this.onLogout,                  this);
+            this.model.on('logout:success',             this.onLogoutSuccess,           this);
+            this.model.on('logout:error',               this.onLogoutError,             this);
             
             // Handle last & new messages
             
@@ -187,7 +188,7 @@
             
             // Show appropriate view
             
-            this.$el.removeClass('login-form chat-box contact-form loading-screen info-screen password-validation-form');
+            this.$el.removeClass('login-form chat-box contact-form loading-screen info-screen password-validation-form welcome-info');
             
             switch(state)
             {
@@ -236,6 +237,14 @@
 
                 case 'password-validation':
                     this.$el.addClass('password-validation-form');
+                    this.$title.html(config.ui.chatHeader);
+                    this.fullscreenOff();
+
+                    this.prevState = state;
+                break;
+
+                case 'welcome':
+                    this.$el.addClass('welcome-info');
                     this.$title.html(config.ui.chatHeader);
                     this.fullscreenOff();
 
@@ -845,6 +854,11 @@
             // For mobile devices, refresh the page
             
             if(this.manualLogin && config.mobile) window.location.reload();
+        },
+
+        showWelcome : function()
+        {
+            this.setState('welcome');
         },
         
         showContact : function()

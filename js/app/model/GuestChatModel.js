@@ -75,11 +75,18 @@
 
             //Checking cookies
 
-            if (_this.checkGuestCache() && typeof this.get('conversationID') === 'number')
+            if (_this.checkGuestCache())
             {
-                // Notify success
-
-                 _this.trigger('login:success');
+                if(typeof this.get('conversationID') === 'number')
+                {
+                    console.log('hola');
+                    _this.trigger('login:success');
+                }
+                else
+                {
+                    console.log('hola2');
+                    _this.trigger('login:welcome');
+                }
 
                  //Maybe useful
 
@@ -155,39 +162,31 @@
             var _this = this;
             
             // Send a logout request
-            
-            $.ajax({
-                type: "PUT",
-                url: config.basePath + sprintf(config.updateChatPath, this.get('conversationID'), this.get('authToken')),
-                data: { status : 'Closed' },
-                success: function(data){
-                    
-                    _this.trigger('logout:success');
 
-                    // Clear guest data cache
+            if(typeof this.get('conversationID') === 'number')
+            {
+                $.ajax({
+                    type: "PUT",
+                    url: config.basePath + sprintf(config.updateChatPath, this.get('conversationID'), this.get('authToken')),
+                    data: { status : 'Closed' },
+                    success: function(data){
 
-                    $.removeCookie('customer-chat-guest-data');
-                    $.removeCookie('customer-chat-messages');
-                    
-                    // Clear messages cache
-                    
-                    _this.resetMessagesCache();
-
-                    _this.set({conversationID: ''});
-                    
-                    // Notify about logging out
-                    
-                    _this.trigger('login:login');
-                    
-                    // Check operators again
-                    
-                    _this.once('operators:online', this.manageConnection, this);
-                    
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    _this.trigger('logout:error');
-                }
-            });
+                        _this.clearCurrentChat();
+                        
+                        _this.trigger('login:welcome');
+                        
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        _this.trigger('logout:error');
+                    }
+                });    
+            }
+            else
+            {
+                _this.clearCurrentChat();
+                        
+                _this.trigger('login:welcome');
+            }
         },
 
         newChat : function(message)
@@ -568,6 +567,23 @@
             this.cacheGuestData();
 
             this.trigger('login:success');
+        },
+
+        clearCurrentChat: function()
+        {
+            // Clear guest data cache
+
+            $.removeCookie('customer-chat-messages');
+            
+            // Clear messages cache
+            
+            this.resetMessagesCache();
+
+            this.set({conversationID: ''});
+
+            // Check operators again
+                    
+            //_this.once('operators:online', this.manageConnection, this);
         },
 
         checkGuestCache: function()

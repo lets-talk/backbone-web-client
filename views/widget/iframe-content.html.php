@@ -166,6 +166,15 @@
                 <img src="<?php echo $app->asset('img/loading.gif') ?>"class="customer-chat-content-loading-icon" />
             </div>
             
+            <div id="customer-chat-welcome-info" class="customer-chat-content">
+                <div class="customer-chat-content-info">
+                    ¡Hola! Para iniciar una nueva conversación, haz click en el botón de abajo.
+                </div>
+                <!--div class="customer-chat-content-row">
+                    <a href="#" id="customer-chat-info-back" class="customer-chat-content-button"><i class="icon-circle-arrow-left icon-white" style="margin: 3px 3px 0 0;"></i> <?php echo $vars['ui']['startLabel'] ?></a>
+                </div-->
+            </div>
+
             <div id="customer-chat-content-info" class="customer-chat-content">
                 <div id="customer-chat-info-text" class="customer-chat-content-info"></div>
                 <div class="customer-chat-content-row">

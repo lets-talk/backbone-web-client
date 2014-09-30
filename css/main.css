@@ -68,6 +68,11 @@ body, html
     display: none;
 }
 
+.customer-chat-widget #customer-chat-welcome-info
+{
+    display: none;
+}
+
 .customer-chat-widget #customer-chat-content-contact-form
 {
     display: none;
