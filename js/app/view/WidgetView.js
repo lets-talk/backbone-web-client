@@ -15,6 +15,7 @@
             'click #customer-chat-login-start'                : 'login',
             'click #customer-chat-password-validation-start'  : 'passwordValidation',
             'keydown #customer-chat-content-login-form input' : 'loginOnEnter',
+            'click #customer-chat-welcome-info-start'         : 'showChat',
             
             // Chat box
             

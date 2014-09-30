@@ -79,12 +79,10 @@
             {
                 if(typeof this.get('conversationID') === 'number')
                 {
-                    console.log('hola');
                     _this.trigger('login:success');
                 }
                 else
                 {
-                    console.log('hola2');
                     _this.trigger('login:welcome');
                 }
 
