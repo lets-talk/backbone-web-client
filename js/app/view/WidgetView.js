@@ -60,11 +60,12 @@
             
             // Create sub views
             
-            this.loginForm              = new app.LoginFormView         ({ el : this.$('#customer-chat-content-login-form')   });
-            this.passwordValidationForm = new app.PasswordValidationFormView({ el : this.$('#customer-chat-content-password-validation-form')   });
-            this.chatBox                = new app.ChatBoxView           ({ el : this.$('.customer-chat-content-messages')     });
-            this.contactForm            = new app.ContactFormView       ({ el : this.$('#customer-chat-content-contact-form') });
-            this.selectAvatar           = new app.SelectAvatarInlineView({ el : this.$('#customer-chat-select-avatar'), model : config.defaultAvatars });
+            this.loginForm              = new app.LoginFormView                 ({ el : this.$('#customer-chat-content-login-form')   });
+            this.passwordValidationForm = new app.PasswordValidationFormView    ({ el : this.$('#customer-chat-content-password-validation-form')   });
+            this.welcomeInfo            = new app.WelcomeInfoView               ({ el : this.$('#customer-chat-content-welcome-info')   });
+            this.chatBox                = new app.ChatBoxView                   ({ el : this.$('.customer-chat-content-messages')     });
+            this.contactForm            = new app.ContactFormView               ({ el : this.$('#customer-chat-content-contact-form') });
+            this.selectAvatar           = new app.SelectAvatarInlineView        ({ el : this.$('#customer-chat-select-avatar'), model : config.defaultAvatars });
             
             // Cache view components
             

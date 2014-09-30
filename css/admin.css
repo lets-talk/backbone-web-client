@@ -4,7 +4,7 @@
 .customer-chat-login .customer-chat-header,
 #customer-chat-content-login-form,
 #customer-chat-content-password-validation-form,
-#customer-chat-welcome-info
+#customer-chat-content-welcome-info
 {
     min-width: 0;
     min-height: 0;
@@ -13,26 +13,28 @@
 
 #customer-chat-content-login-form,
 #customer-chat-content-password-validation-form,
-#customer-chat-welcome-info
+#customer-chat-content-welcome-info
 {
     min-height: 353px;
 }
 
-.login-form, .password-validation-form
+.login-form, 
+.password-validation-form,
+.welcome-info
 {
     height: auto;
 }
 
 #customer-chat-content-login-form.customer-chat-content,
 #customer-chat-content-password-validation-form.customer-chat-content,
-#customer-chat-welcome-info.customer-chat-content
+#customer-chat-content-welcome-info.customer-chat-content
 {
     top: 0;
 }
 
 #customer-chat-content-login-form .customer-chat-content-row,
 #customer-chat-content-password-validation-form .customer-chat-content-row,
-#customer-chat-welcome-info .customer-chat-content-row
+#customer-chat-content-welcome-info .customer-chat-content-row
 {
     bottom: 36px;
 }

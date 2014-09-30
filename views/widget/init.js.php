@@ -42,7 +42,7 @@
         loadingLabel: 'Cargando...',
         loginError: 'El usuario o la contraseña son inválidos.',
         chatHeader: 'Chatea con nosotros',
-        startInfo: 'Por favor, completa la siguiente para empezar a chatear',
+        startInfo: 'Por favor, completa el siguiente formulario para empezar a chatear',
         widgetWidth: 370,
         widgetHeight: 411,
         widgetOffset: 50,

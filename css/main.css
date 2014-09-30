@@ -68,7 +68,7 @@ body, html
     display: none;
 }
 
-.customer-chat-widget #customer-chat-welcome-info
+.customer-chat-widget #customer-chat-content-welcome-info
 {
     display: none;
 }
@@ -116,7 +116,8 @@ body, html
 }
 
 .customer-chat-widget.login-form #customer-chat-content-chat-box,
-.customer-chat-widget.password-validation-form #customer-chat-content-chat-box
+.customer-chat-widget.password-validation-form #customer-chat-content-chat-box,
+.customer-chat-widget.welcome-info #customer-chat-content-chat-box
 {
     display: none;
 }
@@ -650,7 +651,8 @@ body, html
 
 .customer-chat-widget.contact-form .customer-chat-content-message-input,
 .customer-chat-widget.login-form .customer-chat-content-message-input,
-.customer-chat-widget.password-validation-form .customer-chat-content-message-input
+.customer-chat-widget.password-validation-form .customer-chat-content-message-input,
+.customer-chat-widget.welcome-info .customer-chat-content-message-input,
 {
     background: #fff;
     
@@ -662,7 +664,8 @@ body, html
 
 .customer-chat-widget.contact-form .customer-chat-content-message-input-field,
 .customer-chat-widget.login-form .customer-chat-content-message-input-field,
-.customer-chat-widget.password-validation-form .customer-chat-content-message-input-field
+.customer-chat-widget.password-validation-form .customer-chat-content-message-input-field,
+.customer-chat-widget.welcome-info .customer-chat-content-message-input-field
 {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
