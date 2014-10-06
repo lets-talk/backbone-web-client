@@ -84,11 +84,7 @@
                 else
                 {
                     _this.trigger('login:welcome');
-                }
-
-                 //Maybe useful
-
-                 //_this.set({ name : data.name, mail : data.mail, image : data.image });
+                }                
             }
             else
             {

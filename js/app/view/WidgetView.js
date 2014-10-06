@@ -87,6 +87,7 @@
             this.$loginName                     = this.$('#customer-chat-login-name');
             this.$loginMail                     = this.$('#customer-chat-login-mail');
             this.$passwordValidationPassword    = this.$('#customer-chat-password-validation-password');
+            this.$welcomeMessage                = this.$('#customer-chat-content-welcome-message');
             this.$info                          = this.$('#customer-chat-info-text');
             this.$toggleSound                   = this.$('.customer-chat-toggle-sound');
             this.$toggleScroll                  = this.$('.customer-chat-toggle-scroll');
@@ -248,6 +249,7 @@
                 case 'welcome':
                     this.$el.addClass('welcome-info');
                     this.$title.html(config.ui.chatHeader);
+                    this.$welcomeMessage.html('¡Hola ' + this.model.get('name') + ' (' + this.model.get('mail') + ')! Para iniciar una nueva conversación, haz click en el botón de abajo.');
                     this.fullscreenOff();
 
                     this.prevState = state;

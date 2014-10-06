@@ -167,7 +167,7 @@
             </div>
             
             <div id="customer-chat-content-welcome-info" class="customer-chat-content">
-                <div class="customer-chat-content-info">
+                <div id="customer-chat-content-welcome-message" class="customer-chat-content-info">
                     ¡Hola! Para iniciar una nueva conversación, haz click en el botón de abajo.
                 </div>
                 <div class="customer-chat-content-row">
