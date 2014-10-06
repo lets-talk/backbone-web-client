@@ -208,7 +208,7 @@
             $.ajax({
                 url: config.basePath + sprintf(config.newChatPath, this.get('authToken')),
                 type: "POST",
-                params: tempInput,
+                data: tempInput,
                 success: function(data)
                 {
                     _this.set({ conversationID: data.id });
@@ -348,19 +348,7 @@
                                     _this.trigger('messages:new', realMessages);    
                             }
                         });
-
-                        // Collect operator(s) info
-
-                        /*_this.loadOperatorsData(data, function()
-                        {
-                            // Notify about new messages
-                            
-                            data.authorType = 'operator';
-                            
-                            _this.trigger('messages:new', data);
-                        });*/
-                    }
-                    
+                    }                    
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     _this.isGettingMessages = false;
@@ -489,7 +477,7 @@
         
         sendMessage : function(message, callback)
         {
-            if (this.get('conversationID').length === 0)
+            if(typeof this.get('conversationID') !== 'number')
                 return;
 
             // Prepare data
@@ -550,7 +538,7 @@
                 
                 // Checking typing status
                 
-                _this.getTypingStatus();
+                //_this.getTypingStatus();
                 
                 // Checking operator's availability
                 

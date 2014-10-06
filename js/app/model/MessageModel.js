@@ -10,11 +10,12 @@
 
         defaults : {
             
-            author       : '',
-            content      : '',
-            toAuthor     : 'all',
-            toAuthorMail : '',
-            avatar       : ''
+            author          : '',
+            content         : '',
+            toAuthor        : 'all',
+            toAuthorMail    : '',
+            avatar          : '',
+            conversationID  : '' 
         },
 
         initialize : function(attributes, options)
