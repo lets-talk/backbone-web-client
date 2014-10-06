@@ -662,13 +662,12 @@
 
             if(typeof this.model.get('conversationID') !== 'number')
             {
-                this.model.newChat(message);
+                this.model.newChat(message, this.$input);
             }
             else
             {
                 this.model.sendMessage(message);
             }
-            
             
             // Add message to the chat box
             

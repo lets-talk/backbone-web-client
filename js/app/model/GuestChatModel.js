@@ -190,7 +190,7 @@
             this.trigger('login:login');
         },
 
-        newChat : function(message)
+        newChat : function(message, inputElement)
         {
             if(!this.get('guestID') || this.get('guestID') == undefined)
                 return;
@@ -203,23 +203,34 @@
                 client_id: this.get('guestID')
             };
 
-            $.post(config.basePath + sprintf(config.newChatPath, this.get('authToken')), tempInput, function(data)
-            {
-                _this.set({ conversationID: data.id });
-                _this.cacheGuestData();
+            $(inputElement).prop('disabled', true);
 
-                _this.resetMessagesCache();
-
-                //Updating user sync time
-
-                if (data.response_server_time)
+            $.ajax({
+                url: config.basePath + sprintf(config.newChatPath, this.get('authToken')),
+                type: "POST",
+                params: tempInput,
+                success: function(data)
                 {
-                    _this.set({ syncTime: data.response_server_time })
+                    _this.set({ conversationID: data.id });
                     _this.cacheGuestData();
-                }
 
-                _this.sendMessage(message);
-                
+                    $(inputElement).prop('disabled', false);
+
+                    _this.resetMessagesCache();
+
+                    //Updating user sync time
+
+                    if (data.response_server_time)
+                    {
+                        _this.set({ syncTime: data.response_server_time })
+                        _this.cacheGuestData();
+                    }
+
+                    _this.sendMessage(message);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    $(inputElement).prop('disabled', false);
+                }
             });
         },
         
