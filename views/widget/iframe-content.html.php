@@ -167,8 +167,12 @@
             </div>
             
             <div id="customer-chat-content-welcome-info" class="customer-chat-content">
-                <div id="customer-chat-content-welcome-message" class="customer-chat-content-info">
+                <div id="customer-chat-content-welcome-message" class="customer-chat-content-info" style="height: 40px">
                     ¡Hola! Para iniciar una nueva conversación, haz click en el botón de abajo.
+
+                </div>
+                <div class="customer-chat-content-info">
+                    <a id="customer-chat-content-welcome-logout" href="#">Salir</a>
                 </div>
                 <div class="customer-chat-content-row">
                     <a href="#" id="customer-chat-welcome-info-start" class="customer-chat-content-button"><?php echo $vars['ui']['startLabel'] ?> <i class="icon-circle-arrow-right icon-white" style="margin: 3px 0 0 3px;"></i></a>

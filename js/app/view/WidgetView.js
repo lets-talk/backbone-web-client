@@ -16,6 +16,7 @@
             'click #customer-chat-password-validation-start'  : 'passwordValidation',
             'keydown #customer-chat-content-login-form input' : 'loginOnEnter',
             'click #customer-chat-welcome-info-start'         : 'showChat',
+            'click #customer-chat-content-welcome-logout'     : 'logout',
             
             // Chat box
             
@@ -524,6 +525,13 @@
             
             // Logout
             
+            this.model.endChat();
+        },
+
+        logout: function(event)
+        {
+            event.preventDefault();
+
             this.model.logout();
         },
         

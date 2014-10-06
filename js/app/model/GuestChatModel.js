@@ -145,7 +145,7 @@
             })
         },
         
-        logout : function()
+        endChat : function()
         {
             // Stop connection management
             
@@ -181,6 +181,13 @@
                         
                 _this.trigger('login:welcome');
             }
+        },
+
+        logout: function()
+        {
+            this.removeGuestCacheData();
+
+            this.trigger('login:login');
         },
 
         newChat : function(message)
@@ -604,6 +611,11 @@
             }
 
             $.cookie('customer-chat-guest-data', JSON.stringify(data), { expires : date });
+        },
+
+        removeGuestCacheData: function()
+        {
+            $.removeCookie('customer-chat-guest-data');
         }
     },
     {
