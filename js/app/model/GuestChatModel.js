@@ -53,6 +53,7 @@
 
             if(this.checkGuestCache() && $.cookie('customer-chat-messages'))
             {
+                console.log($.cookie('customer-chat-messages'));
                 this.lastMessages = JSON.parse($.cookie('customer-chat-messages'));
             }
 
@@ -198,7 +199,7 @@
             var _this = this;
 
             var tempInput = {
-                issue: this.get('mail'),
+                issue: message.get('content'),
                 organization_id: config.organizationID,
                 client_id: this.get('guestID')
             };
@@ -475,6 +476,11 @@
             return this.operatorsCache[id] && this.operatorsCache[id].name;
         },
         
+        checkMessages: function()
+        {
+            
+        },
+
         sendMessage : function(message, callback)
         {
             if(typeof this.get('conversationID') !== 'number')
@@ -504,7 +510,10 @@
                     {
                         _this.set({ syncTime: data.created_at })
                         _this.cacheGuestData();
-                    }
+                    }   
+
+                    message.set('conversationID', _this.get('conversationID'));
+                    _this.storeMessages([ message.attributes ]);
 
                     // Notify success
                     
@@ -519,7 +528,7 @@
             
             // Store the message
             
-            this.storeMessages([ message.attributes ]);
+            //this.storeMessages([ message.attributes ]);
         },
         
         manageConnection : function()
